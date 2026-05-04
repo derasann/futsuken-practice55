@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>仏検2級 穴埋め練習</title>
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="仏検穴埋め">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif; background: #f5f4f0; color: #1a1a1a; min-height: 100vh; }
+
+.header { background: #fff; border-bottom: 0.5px solid #ddd; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; height: 52px; }
+.header-left { display: flex; align-items: center; gap: 10px; }
+.flag { display: flex; border-radius: 4px; overflow: hidden; width: 28px; height: 20px; flex-shrink: 0; }
+.flag-blue  { background: #002395; flex: 1; }
+.flag-white { background: #ffffff; flex: 1; border-left: 0.5px solid #eee; border-right: 0.5px solid #eee; }
+.flag-red   { background: #ED2939; flex: 1; }
+.header-title { font-size: 15px; font-weight: 500; }
+.header-right { font-size: 11px; color: #888; }
+
+.controls { background: #fff; padding: 10px 16px; display: flex; gap: 8px; flex-wrap: wrap; border-bottom: 0.5px solid #eee; }
+select { font-size: 13px; padding: 6px 10px; border: 0.5px solid #ccc; border-radius: 8px; background: #fff; color: #1a1a1a; flex: 1; }
+.btn-restart { font-size: 13px; padding: 6px 14px; border: 0.5px solid #ccc; border-radius: 8px; background: #fff; color: #1a1a1a; cursor: pointer; white-space: nowrap; font-family: inherit; }
+.btn-restart:active { background: #f0f0f0; }
+
+.progress-bg { height: 3px; background: #e8e8e8; }
+.progress-fill { height: 3px; background: linear-gradient(to right, #002395 33%, #fff 33%, #fff 66%, #ED2939 66%); transition: width 0.3s; }
+
+.stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; padding: 12px 16px; }
+.stat { background: #fff; border-radius: 10px; padding: 10px 8px; text-align: center; }
+.stat-label { font-size: 10px; color: #888; margin-bottom: 3px; }
+.stat-value { font-size: 20px; font-weight: 500; }
+.word-count { font-size: 11px; color: #aaa; text-align: right; padding: 4px 16px 0; }
+
+.main { padding: 0 16px 40px; }
+
+.q-card { background: #fff; border-radius: 14px; border: 0.5px solid #e0e0e0; padding: 20px; margin-bottom: 14px; position: relative; overflow: hidden; }
+.q-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(to right, #002395 33%, #fff 33%, #fff 66%, #ED2939 66%); }
+.q-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.q-theme { font-size: 11px; background: #E6F1FB; color: #0C447C; padding: 3px 9px; border-radius: 20px; font-weight: 500; }
+.q-num { font-size: 11px; color: #aaa; }
+.q-fr { font-size: 17px; color: #1a1a1a; line-height: 1.8; margin-bottom: 8px; }
+.q-ja { font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 14px; padding: 8px 12px; background: #f9f8f5; border-radius: 8px; border-left: 3px solid #002395; }
+.blank { display: inline-block; min-width: 90px; border-bottom: 2px solid #002395; color: #002395; font-weight: 500; text-align: center; padding: 0 4px; }
+
+.choices-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.choice-btn { padding: 13px 10px; border: 0.5px solid #ccc; border-radius: 10px; background: #fff; color: #1a1a1a; font-size: 13px; cursor: pointer; text-align: center; font-family: inherit; -webkit-tap-highlight-color: transparent; }
+.choice-btn:active:not(:disabled) { background: #f0f0f0; }
+.choice-btn.correct { background: #EAF7EE; border-color: #4CAF7D; color: #1a5c32; font-weight: 500; }
+.choice-btn.wrong   { background: #FDECEA; border-color: #e57373; color: #8b1a1a; }
+.choice-btn:disabled { cursor: default; }
+
+.result-box { border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; }
+.result-box.ok { background: #EAF7EE; border: 0.5px solid #4CAF7D; }
+.result-box.ng { background: #FDECEA; border: 0.5px solid #e57373; }
+.result-msg { font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+.result-msg.ok { color: #1a5c32; }
+.result-msg.ng { color: #8b1a1a; }
+.result-hint { font-size: 12px; color: #555; line-height: 1.8; }
+.result-hint strong { color: #002395; }
+
+.next-btn { display: block; width: 100%; padding: 14px; border: 0.5px solid #ccc; border-radius: 12px; background: #fff; color: #1a1a1a; font-size: 15px; cursor: pointer; font-family: inherit; -webkit-tap-highlight-color: transparent; }
+.next-btn:active:not(:disabled) { background: #f0f0f0; }
+.next-btn:disabled { opacity: 0.3; cursor: default; }
+
+.finish-box { background: #fff; border-radius: 14px; border: 0.5px solid #e0e0e0; padding: 36px 20px; text-align: center; margin-top: 8px; position: relative; overflow: hidden; }
+.finish-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px; background: linear-gradient(to right, #002395 33%, #fff 33%, #fff 66%, #ED2939 66%); }
+.finish-flag { display: flex; width: 48px; height: 32px; border-radius: 4px; overflow: hidden; margin: 12px auto 16px; }
+.finish-title { font-size: 22px; font-weight: 500; margin-bottom: 8px; }
+.finish-sub   { font-size: 14px; color: #888; margin-bottom: 24px; line-height: 2; white-space: pre-line; }
+.finish-btns  { display: flex; flex-direction: column; gap: 10px; }
+.btn-again { padding: 14px; border: 0.5px solid #ccc; border-radius: 12px; background: #fff; color: #1a1a1a; font-size: 15px; cursor: pointer; font-family: inherit; }
+.btn-weak  { padding: 14px; border: 0.5px solid #e57373; border-radius: 12px; background: #fff; color: #c0392b; font-size: 15px; cursor: pointer; font-family: inherit; }
+.btn-again:active { background: #f0f0f0; }
+.btn-weak:active  { background: #FDECEA; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="flag"><div class="flag-blue"></div><div class="flag-white"></div><div class="flag-red"></div></div>
+    <div class="header-title">仏検2級 穴埋め練習</div>
+  </div>
+  <div class="header-right" id="header-right">読み込み中...</div>
+</div>
+
+<div class="controls">
+  <select id="theme-select">
+    <option value="all">すべてのテーマ</option>
+    <option value="場所">場所</option>
+    <option value="交通・住まい">交通・住まい</option>
+  </select>
+  <select id="mode-select">
+    <option value="all">全問題</option>
+    <option value="weak">苦手のみ</option>
+  </select>
+  <button class="btn-restart" onclick="restartDeck()">最初から</button>
+</div>
+
+<div class="progress-bg"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+
+<div class="stats-row">
+  <div class="stat"><div class="stat-label">残り</div><div class="stat-value" id="s-remain">-</div></div>
+  <div class="stat"><div class="stat-label">正解</div><div class="stat-value" id="s-ok" style="color:#2e7d4f;">0</div></div>
+  <div class="stat"><div class="stat-label">不正解</div><div class="stat-value" id="s-ng" style="color:#c0392b;">0</div></div>
+  <div class="stat"><div class="stat-label">苦手</div><div class="stat-value" id="s-weak">0</div></div>
+</div>
+<div class="word-count" id="word-count"></div>
+
+<div class="main">
+  <div id="main-area">
+    <div class="q-card">
+      <div class="q-meta">
+        <span class="q-theme" id="q-theme">-</span>
+        <span class="q-num" id="q-num">-</span>
+      </div>
+      <div class="q-fr" id="q-fr">読み込み中...</div>
+      <div class="q-ja" id="q-ja"></div>
+    </div>
+    <div class="choices-grid" id="choices"></div>
+    <div id="result-row"></div>
+    <button class="next-btn" id="next-btn" onclick="nextCard()" disabled>次の問題へ →</button>
+  </div>
+
+  <div id="finish-area" style="display:none;">
+    <div class="finish-box">
+      <div class="finish-flag">
+        <div style="background:#002395;flex:1;"></div>
+        <div style="background:#fff;flex:1;border-left:0.5px solid #eee;border-right:0.5px solid #eee;"></div>
+        <div style="background:#ED2939;flex:1;"></div>
+      </div>
+      <div class="finish-title" id="finish-title"></div>
+      <div class="finish-sub" id="finish-sub"></div>
+      <div class="finish-btns">
+        <button class="btn-again" onclick="restartDeck()">もう一度</button>
+        <button class="btn-weak" onclick="studyWeak()">苦手だけ練習</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =====================================================
+   ★ 問題データ ★
+   毎日ここに追加していきます！
+
+   追加フォーマット：
+   {
+     id:       "ユニークID（例：p43-1）",
+     theme:    "テーマ（場所／交通・住まい／前置詞 など）",
+     exercice: "参考書の番号（例：Ex.4）",
+     date:     "追加日（例：5/4）",
+     fr:       "フランス語文。空欄は (__) と書く",
+     ja:       "日本語訳",
+     answer:   "正解の単語",
+     choices:  ["正解を含む4つの選択肢"],
+     hint:     "解説・ポイント"
+   }
+===================================================== */
+const QUESTIONS = [
+
+  /* -----------------------------------------------
+     【場所】EXERCICE 4 p.43　追加日：5/4
+  ----------------------------------------------- */
+  {
+    id:"p43-1", theme:"場所", exercice:"Ex.4", date:"5/4",
+    fr:"Au (__) du film, il y a eu une panne d'électricité.",
+    ja:"映画の途中で、停電になった。",
+    answer:"milieu",
+    choices:["milieu","bord","lieu","endroit"],
+    hint:"au milieu de〜 ＝ 〜の途中で・真ん中で"
+  },
+  {
+    id:"p43-2", theme:"場所", exercice:"Ex.4", date:"5/4",
+    fr:"Beaucoup de pays d'Afrique sont en (__) de développement.",
+    ja:"アフリカの多くの国が発展途上にある。",
+    answer:"voie",
+    choices:["voie","lieu","bord","terre"],
+    hint:"en voie de〜 ＝ 〜しつつある・〜の途上にある（les pays en voie de développement 発展途上国）"
+  },
+  {
+    id:"p43-3", theme:"場所", exercice:"Ex.4", date:"5/4",
+    fr:"D'où (__) que tu es toujours contre mon projet ?",
+    ja:"なぜ君はいつもぼくの計画に反対するの？",
+    answer:"vient",
+    choices:["vient","sort","part","revient"],
+    hint:"D'où vient que + 直説法 ＝ どうして〜なのか？（やや文語的な表現）"
+  },
+  {
+    id:"p43-4", theme:"場所", exercice:"Ex.4", date:"5/4",
+    fr:"Il fait froid dehors, attends-moi à l'(__).",
+    ja:"外は寒いから、中で待ってて。",
+    answer:"intérieur",
+    choices:["intérieur","extérieur","endroit","milieu"],
+    hint:"à l'intérieur ＝ 中に・室内に（↔ dehors 外に）"
+  },
+  {
+    id:"p43-5", theme:"場所", exercice:"Ex.4", date:"5/4",
+    fr:"Il y a trop de bruit ici, je vais (__).",
+    ja:"ここはうるさすぎる、よそへ行きます。",
+    answer:"ailleurs",
+    choices:["ailleurs","dehors","là-bas","loin"],
+    hint:"ailleurs ＝ ほかの場所に ／ d'ailleurs そのうえ・ちなみに"
+  },
+  {
+    id:"p43-6", theme:"場所", exercice:"Ex.4", date:"5/4",
+    fr:"Je ne veux pas monter à (__) d'un bateau, j'ai le mal de mer.",
+    ja:"私は船には乗りたくない、船酔いするから。",
+    answer:"bord",
+    choices:["bord","quai","pont","lieu"],
+    hint:"à bord de〜 ＝ 〜に乗って（船・飛行機・車に使う）"
+  },
+  {
+    id:"p43-7", theme:"場所", exercice:"Ex.4", date:"5/4",
+    fr:"La population (__) ne cesse d'augmenter.",
+    ja:"都市の人口は絶えず増えている。",
+    answer:"urbaine",
+    choices:["urbaine","rurale","locale","mondiale"],
+    hint:"urbain(e) ＝ 都市の（↔ rural 農村の）"
+  },
+  {
+    id:"p43-8", theme:"場所", exercice:"Ex.4", date:"5/4",
+    fr:"La voiture accidentée est restée sur (__) deux jours.",
+    ja:"事故車は２日間現場に残されていた。",
+    answer:"place",
+    choices:["place","lieu","bord","terre"],
+    hint:"sur place ＝ その場で・現地で（La police est arrivée sur place. 警察は現場に到着した）"
+  },
+  {
+    id:"p43-9", theme:"場所", exercice:"Ex.4", date:"5/4",
+    fr:"Le (__) de ce pays est riche en pétrole.",
+    ja:"この国の地下には豊かな石油が埋蔵されている。",
+    answer:"sous-sol",
+    choices:["sous-sol","sol","terrain","fond"],
+    hint:"sous-sol ＝ 地下（名詞）・地下室"
+  },
+  {
+    id:"p43-10", theme:"場所", exercice:"Ex.4", date:"5/4",
+    fr:"Les documents traînent par (__).",
+    ja:"資料が床に散らかっている。",
+    answer:"terre",
+    choices:["terre","sol","place","bord"],
+    hint:"par terre ＝ 地面に・床に（cf. à terre 地面に倒れて）"
+  },
+  {
+    id:"p43-11", theme:"場所", exercice:"Ex.4", date:"5/4",
+    fr:"Moi, à la (__) du café, je préférerais prendre un thé.",
+    ja:"私としては、コーヒーではなくて紅茶のほうがいいんですが。",
+    answer:"place",
+    choices:["place","lieu","part","façon"],
+    hint:"à la place de〜 ＝ 〜の代わりに（＝ au lieu de〜）"
+  },
+  {
+    id:"p43-12", theme:"場所", exercice:"Ex.4", date:"5/4",
+    fr:"Ne prends pas cette rue, c'est une (__)!",
+    ja:"この通りに入るな、行き止まりだよ。",
+    answer:"impasse",
+    choices:["impasse","voie","route","allée"],
+    hint:"impasse ＝ 袋小路・行き詰まり（比喩的にも：c'est l'impasse 行き詰まりだ）"
+  },
+  {
+    id:"p43-13", theme:"場所", exercice:"Ex.4", date:"5/4",
+    fr:"Notre prochaine réunion aura (__) le vendredi 17 juin.",
+    ja:"私たちの次の会議は6月17日の金曜日に行なわれる。",
+    answer:"lieu",
+    choices:["lieu","place","part","cours"],
+    hint:"avoir lieu ＝ 行われる・起こる（＝ se passer）"
+  },
+  {
+    id:"p43-14", theme:"場所", exercice:"Ex.4", date:"5/4",
+    fr:"Nous avons (__) le village à la recherche d'un restaurant.",
+    ja:"私たちはレストランを探して村中を歩きまわった。",
+    answer:"parcouru",
+    choices:["parcouru","traversé","visité","quitté"],
+    hint:"parcourir ＝ 歩き回る・縦断する（p.p. parcouru）"
+  },
+  {
+    id:"p43-15", theme:"場所", exercice:"Ex.4", date:"5/4",
+    fr:"Quand le bateau a fait naufrage, il y avait une centaine de passagers à (__).",
+    ja:"その船が難破したとき、100名ほどの乗客がいた。",
+    answer:"bord",
+    choices:["bord","quai","pont","fond"],
+    hint:"à bord ＝ 乗船・搭乗して"
+  },
+
+  /* -----------------------------------------------
+     【交通・住まい】EXERCICE 38 p.111　追加日：5/4
+  ----------------------------------------------- */
+  {
+    id:"p111-1", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
+    fr:"«(__) interdit à toute personne étrangère aux travaux»",
+    ja:"工事関係者以外立ち入り禁止",
+    answer:"accès",
+    choices:["accès","entrée","passage","voie"],
+    hint:"accès ＝ 接近・入口 ／「Accès interdit」立入禁止"
+  },
+  {
+    id:"p111-2", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
+    fr:"Je ne sais pas, mais vous avez les (__) là-bas.",
+    ja:"さあ、でもむこうに時刻表があります。",
+    answer:"horaires",
+    choices:["horaires","billets","cartes","plans"],
+    hint:"horaire(s) ＝ 時刻表・時間割（consulter l'horaire des trains 列車の時刻表を調べる）"
+  },
+  {
+    id:"p111-3", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
+    fr:"Elles sont chères ces assiettes, dix euros (__) !",
+    ja:"これらの皿は高い、１枚10ユーロもする！",
+    answer:"pièce",
+    choices:["pièce","unité","chacune","article"],
+    hint:"pièce ＝ 部屋・1個 ／ Cela coûte un euro la pièce. これは1個1ユーロする"
+  },
+  {
+    id:"p111-4", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
+    fr:"J'ai acheté une (__) de toilette pour la salle de bains.",
+    ja:"バスルームに洗面用キャビネットを買ったんだけど、気に入った？",
+    answer:"armoire",
+    choices:["armoire","meuble","étagère","table"],
+    hint:"armoire ＝ 洋服タンス・収納棚 ／ armoire à chaussures 靴箱"
+  },
+  {
+    id:"p111-5", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
+    fr:"J'ai loué un appartement (__) avec douche, W.C. et cuisine.",
+    ja:"私はシャワー、トイレ、台所のある家具つきアパルトマンを借りた。",
+    answer:"meublé",
+    choices:["meublé","armoire","équipé","aménagé"],
+    hint:"meublé(e) ＝ 家具つきの ／ un appartement meublé 家具つきアパルトマン"
+  },
+  {
+    id:"p111-6", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
+    fr:"Je dois passer un (__) de fil.",
+    ja:"電話をかけなければならない。",
+    answer:"coup",
+    choices:["coup","appel","message","signe"],
+    hint:"passer un coup de fil ＝ 電話をかける（＝ téléphoner）"
+  },
+  {
+    id:"p111-7", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
+    fr:"Je retourne à Paris demain, mais je n'ai pas encore fait les (__).",
+    ja:"私はあすパリへ帰ります、でも荷づくりはまだです。",
+    answer:"bagages",
+    choices:["bagages","valises","paquets","affaires"],
+    hint:"faire ses bagages ＝ 荷造りをする"
+  },
+  {
+    id:"p111-8", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
+    fr:"J'étais en (__) de lire quand tu m'as téléphoné.",
+    ja:"君が電話したとき、私は本を読んでいた。",
+    answer:"train",
+    choices:["train","cours","moment","milieu"],
+    hint:"être en train de + 不定詞 ＝ 〜している最中である（重要表現！）"
+  },
+  {
+    id:"p111-9", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
+    fr:"N'entrez pas dans le salon, je vais passer l'(__).",
+    ja:"応接間に入らないで、掃除機をかけるから。",
+    answer:"aspirateur",
+    choices:["aspirateur","balai","serpillière","brosse"],
+    hint:"passer l'aspirateur ＝ 掃除機をかける"
+  },
+  {
+    id:"p111-10", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
+    fr:"N'oublie pas d'éteindre l'(__) avant de partir.",
+    ja:"出かけるまえに電気を消すのを忘れないでね。",
+    answer:"électricité",
+    choices:["électricité","lumière","lampe","feu"],
+    hint:"éteindre l'électricité ＝ 電気を消す（↔ allumer 電気をつける）"
+  },
+  {
+    id:"p111-11", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
+    fr:"Pour appeler vers l'étranger, vous devez (__) d'abord le 00.",
+    ja:"海外に電話するなら、まず00をダイヤルしなければなりません。",
+    answer:"composer",
+    choices:["composer","former","taper","appuyer"],
+    hint:"composer un numéro ＝ 電話番号をダイヤルする"
+  },
+  {
+    id:"p111-12", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
+    fr:"Quelle est l'heure d'(__) du train ?",
+    ja:"列車の到着時刻は何時ですか？",
+    answer:"arrivée",
+    choices:["arrivée","départ","passage","retard"],
+    hint:"l'heure d'arrivée ＝ 到着時刻（↔ l'heure de départ 出発時刻）"
+  },
+  {
+    id:"p111-13", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
+    fr:"Tu as porté ton manteau au (__) ?",
+    ja:"コートはクリーニングへもって行った？",
+    answer:"nettoyage",
+    choices:["nettoyage","pressing","lavage","entretien"],
+    hint:"nettoyage ＝ 掃除・クリーニング ／ faire le nettoyage 掃除する"
+  },
+  {
+    id:"p111-14", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
+    fr:"—Tu es à la (__) ? —Oui, j'ai oublié mes clefs.",
+    ja:"一家に入れないの？ —うん、鍵を忘れたんだ。",
+    answer:"porte",
+    choices:["porte","entrée","fenêtre","sortie"],
+    hint:"être à la porte ＝ 締め出されている ／ mettre qn à la porte 追い出す"
+  },
+  {
+    id:"p111-15", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
+    fr:"Vous mettez une carte mémoire dans votre (__).",
+    ja:"あなたのコンピューターにメモリーカードを入れてください。",
+    answer:"ordinateur",
+    choices:["ordinateur","appareil","téléphone","tablette"],
+    hint:"ordinateur ＝ コンピュータ ／ ordinateur personnel パソコン"
+  },
+
+  /* -----------------------------------------------
+     ★ 以降、毎日ここに追加していく ★
+
+     追加例：
+  {
+    id:"p000-1", theme:"テーマ名", exercice:"Ex.XX", date:"5/5",
+    fr:"文章。空欄は (__) と書く",
+    ja:"日本語訳",
+    answer:"正解",
+    choices:["正解","不正解1","不正解2","不正解3"],
+    hint:"解説"
+  },
+  ----------------------------------------------- */
+
+];
+
+/* ─────────────────────────────
+   localStorage（苦手保存）
+───────────────────────────── */
+const KEY_WEAK = 'bukken2_ana_weak_v2';
+function loadWeak()  { try { return new Set(JSON.parse(localStorage.getItem(KEY_WEAK)||'[]')); } catch(e) { return new Set(); } }
+function saveWeak(s) { localStorage.setItem(KEY_WEAK, JSON.stringify([...s])); }
+
+let deck=[], current=0, okCount=0, ngCount=0;
+let weakSet=loadWeak(), answered=false;
+
+function getPool() {
+  const theme = document.getElementById('theme-select').value;
+  const mode  = document.getElementById('mode-select').value;
+  let qs = QUESTIONS;
+  if (theme !== 'all') qs = qs.filter(q => q.theme === theme);
+  if (mode  === 'weak') qs = qs.filter(q => weakSet.has(q.id));
+  return qs;
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i=a.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+function restartDeck() {
+  const pool = getPool();
+  if (pool.length === 0) {
+    alert('苦手問題がまだありません。');
+    document.getElementById('mode-select').value = 'all';
+    restartDeck(); return;
+  }
+  deck = shuffle(pool);
+  current=0; okCount=0; ngCount=0;
+  document.getElementById('finish-area').style.display = 'none';
+  document.getElementById('main-area').style.display = 'block';
+  showQuestion();
+}
+
+function showQuestion() {
+  if (current >= deck.length) { showFinish(); return; }
+  answered = false;
+  const q = deck[current];
+
+  document.getElementById('q-theme').textContent = q.theme + '　' + q.exercice;
+  document.getElementById('q-num').textContent = (current+1) + ' / ' + deck.length;
+  document.getElementById('q-fr').innerHTML = q.fr.replace('(__)', '<span class="blank">　　　　</span>');
+  document.getElementById('q-ja').textContent = q.ja;
+  document.getElementById('result-row').innerHTML = '';
+  document.getElementById('next-btn').disabled = true;
+
+  const choices = shuffle([...q.choices]);
+  const container = document.getElementById('choices');
+  container.innerHTML = '';
+  choices.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.textContent = c;
+    btn.onclick = () => selectAnswer(btn, c === q.answer, q);
+    container.appendChild(btn);
+  });
+  updateStats();
+}
+
+function selectAnswer(btn, isCorrect, q) {
+  if (answered) return;
+  answered = true;
+  document.querySelectorAll('.choice-btn').forEach(b => {
+    b.disabled = true;
+    if (b.textContent === q.answer) b.classList.add('correct');
+  });
+
+  const frAnswered = q.fr.replace('(__)', '<strong>' + q.answer + '</strong>');
+  const row = document.getElementById('result-row');
+
+  if (isCorrect) {
+    btn.classList.add('correct'); okCount++;
+    weakSet.delete(q.id); saveWeak(weakSet);
+    row.innerHTML = '<div class="result-box ok"><div class="result-msg ok">正解！</div><div class="result-hint">' + frAnswered + '<br>' + q.hint + '</div></div>';
+  } else {
+    btn.classList.add('wrong'); ngCount++;
+    weakSet.add(q.id); saveWeak(weakSet);
+    row.innerHTML = '<div class="result-box ng"><div class="result-msg ng">不正解 — 苦手に登録しました</div><div class="result-hint">' + frAnswered + '<br>' + q.hint + '</div></div>';
+  }
+  document.getElementById('next-btn').disabled = false;
+  document.getElementById('s-weak').textContent = weakSet.size;
+}
+
+function nextCard() { current++; showQuestion(); }
+
+function updateStats() {
+  const total = deck.length;
+  document.getElementById('s-remain').textContent = Math.max(0, total-current);
+  document.getElementById('s-ok').textContent = okCount;
+  document.getElementById('s-ng').textContent = ngCount;
+  document.getElementById('s-weak').textContent = weakSet.size;
+  document.getElementById('prog').style.width = (total>0 ? Math.round(current/total*100) : 0) + '%';
+  document.getElementById('word-count').textContent = '収録問題数：' + QUESTIONS.length + '問';
+  document.getElementById('header-right').textContent = QUESTIONS.length + '問収録';
+}
+
+function showFinish() {
+  document.getElementById('main-area').style.display = 'none';
+  document.getElementById('finish-area').style.display = 'block';
+  const total = okCount + ngCount;
+  const rate = total>0 ? Math.round(okCount/total*100) : 0;
+  document.getElementById('finish-title').textContent = '完了！　正解率 ' + rate + '%';
+  document.getElementById('finish-sub').textContent = '正解 ' + okCount + ' / ' + total + '問\n苦手登録 ' + weakSet.size + '問';
+}
+
+function studyWeak() {
+  document.getElementById('mode-select').value = 'weak';
+  restartDeck();
+}
+
+document.getElementById('theme-select').addEventListener('change', restartDeck);
+document.getElementById('mode-select').addEventListener('change', restartDeck);
+restartDeck();
+</script>
+</body>
+</html>
