@@ -20,26 +20,44 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sa
 .header-title { font-size: 15px; font-weight: 500; }
 .header-right { font-size: 11px; color: #888; }
 
+/* タブ */
+.tab-bar { background: #fff; border-bottom: 0.5px solid #eee; display: flex; }
+.tab-btn { flex: 1; font-size: 12px; padding: 10px 4px; border: none; background: transparent; color: #888; cursor: pointer; font-family: inherit; border-bottom: 2px solid transparent; }
+.tab-btn.active { color: #002395; border-bottom-color: #002395; font-weight: 500; }
+
 .controls { background: #fff; padding: 10px 16px; display: flex; gap: 8px; flex-wrap: wrap; border-bottom: 0.5px solid #eee; }
 select { font-size: 13px; padding: 6px 10px; border: 0.5px solid #ccc; border-radius: 8px; background: #fff; color: #1a1a1a; flex: 1; }
-.btn-restart { font-size: 13px; padding: 6px 14px; border: 0.5px solid #ccc; border-radius: 8px; background: #fff; color: #1a1a1a; cursor: pointer; white-space: nowrap; font-family: inherit; }
-.btn-restart:active { background: #f0f0f0; }
+.btn-small { font-size: 12px; padding: 6px 12px; border: 0.5px solid #ccc; border-radius: 8px; background: #fff; color: #1a1a1a; cursor: pointer; white-space: nowrap; font-family: inherit; }
+.btn-small:active { background: #f0f0f0; }
 
 .progress-bg { height: 3px; background: #e8e8e8; }
 .progress-fill { height: 3px; background: linear-gradient(to right, #002395 33%, #fff 33%, #fff 66%, #ED2939 66%); transition: width 0.3s; }
 
-.stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; padding: 12px 16px; }
-.stat { background: #fff; border-radius: 10px; padding: 10px 8px; text-align: center; }
-.stat-label { font-size: 10px; color: #888; margin-bottom: 3px; }
-.stat-value { font-size: 20px; font-weight: 500; }
-.word-count { font-size: 11px; color: #aaa; text-align: right; padding: 4px 16px 0; }
+.stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; padding: 10px 16px; }
+.stat { background: #fff; border-radius: 10px; padding: 8px 6px; text-align: center; }
+.stat-label { font-size: 10px; color: #888; margin-bottom: 2px; }
+.stat-value { font-size: 18px; font-weight: 500; }
+.word-count { font-size: 11px; color: #aaa; text-align: right; padding: 3px 16px 0; }
 
 .main { padding: 0 16px 40px; }
 
-.q-card { background: #fff; border-radius: 14px; border: 0.5px solid #e0e0e0; padding: 20px; margin-bottom: 14px; position: relative; overflow: hidden; }
+/* 今日の復習バナー */
+.review-banner { background: #fff; border: 0.5px solid #e0e0e0; border-radius: 12px; padding: 14px 16px; margin-top: 12px; margin-bottom: 4px; display: flex; align-items: center; justify-content: space-between; }
+.review-banner-left { font-size: 13px; color: #1a1a1a; }
+.review-banner-count { font-size: 20px; font-weight: 500; color: #002395; }
+.review-banner-label { font-size: 11px; color: #888; }
+.btn-start-review { font-size: 13px; padding: 8px 18px; border: none; border-radius: 8px; background: #002395; color: #fff; cursor: pointer; font-family: inherit; }
+.btn-start-review:active { background: #001a70; }
+
+.q-card { background: #fff; border-radius: 14px; border: 0.5px solid #e0e0e0; padding: 20px; margin-bottom: 14px; position: relative; overflow: hidden; margin-top: 12px; }
 .q-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(to right, #002395 33%, #fff 33%, #fff 66%, #ED2939 66%); }
 .q-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
 .q-theme { font-size: 11px; background: #E6F1FB; color: #0C447C; padding: 3px 9px; border-radius: 20px; font-weight: 500; }
+.q-level { font-size: 11px; padding: 3px 8px; border-radius: 20px; }
+.level-new     { background: #f0f0f0; color: #666; }
+.level-again   { background: #FDECEA; color: #8b1a1a; }
+.level-soon    { background: #FFF3E0; color: #7c4d00; }
+.level-learned { background: #EAF7EE; color: #1a5c32; }
 .q-num { font-size: 11px; color: #aaa; }
 .q-fr { font-size: 17px; color: #1a1a1a; line-height: 1.8; margin-bottom: 8px; }
 .q-ja { font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 14px; padding: 8px 12px; background: #f9f8f5; border-radius: 8px; border-left: 3px solid #002395; }
@@ -61,20 +79,37 @@ select { font-size: 13px; padding: 6px 10px; border: 0.5px solid #ccc; border-ra
 .result-hint { font-size: 12px; color: #555; line-height: 1.8; }
 .result-hint strong { color: #002395; }
 
+/* ANKIボタン */
+.anki-label { font-size: 11px; color: #aaa; text-align: center; margin-bottom: 6px; }
+.anki-btns { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.anki-btn { padding: 12px 6px; border-radius: 10px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; border: none; -webkit-tap-highlight-color: transparent; }
+.anki-btn:active { opacity: 0.8; }
+.anki-perfect { background: #EAF7EE; color: #1a5c32; }
+.anki-fuzzy   { background: #FFF3E0; color: #7c4d00; }
+.anki-again   { background: #FDECEA; color: #8b1a1a; }
+
 .next-btn { display: block; width: 100%; padding: 14px; border: 0.5px solid #ccc; border-radius: 12px; background: #fff; color: #1a1a1a; font-size: 15px; cursor: pointer; font-family: inherit; -webkit-tap-highlight-color: transparent; }
 .next-btn:active:not(:disabled) { background: #f0f0f0; }
 .next-btn:disabled { opacity: 0.3; cursor: default; }
 
-.finish-box { background: #fff; border-radius: 14px; border: 0.5px solid #e0e0e0; padding: 36px 20px; text-align: center; margin-top: 8px; position: relative; overflow: hidden; }
+.finish-box { background: #fff; border-radius: 14px; border: 0.5px solid #e0e0e0; padding: 36px 20px; text-align: center; margin-top: 12px; position: relative; overflow: hidden; }
 .finish-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px; background: linear-gradient(to right, #002395 33%, #fff 33%, #fff 66%, #ED2939 66%); }
 .finish-flag { display: flex; width: 48px; height: 32px; border-radius: 4px; overflow: hidden; margin: 12px auto 16px; }
 .finish-title { font-size: 22px; font-weight: 500; margin-bottom: 8px; }
 .finish-sub   { font-size: 14px; color: #888; margin-bottom: 24px; line-height: 2; white-space: pre-line; }
 .finish-btns  { display: flex; flex-direction: column; gap: 10px; }
 .btn-again { padding: 14px; border: 0.5px solid #ccc; border-radius: 12px; background: #fff; color: #1a1a1a; font-size: 15px; cursor: pointer; font-family: inherit; }
-.btn-weak  { padding: 14px; border: 0.5px solid #e57373; border-radius: 12px; background: #fff; color: #c0392b; font-size: 15px; cursor: pointer; font-family: inherit; }
-.btn-again:active { background: #f0f0f0; }
-.btn-weak:active  { background: #FDECEA; }
+.btn-review-only { padding: 14px; border: 0.5px solid #002395; border-radius: 12px; background: #fff; color: #002395; font-size: 15px; cursor: pointer; font-family: inherit; }
+
+/* 統計タブ */
+.stats-tab { padding: 12px 16px; }
+.stats-card { background: #fff; border-radius: 12px; border: 0.5px solid #e0e0e0; padding: 16px; margin-bottom: 10px; }
+.stats-card-title { font-size: 12px; color: #888; margin-bottom: 12px; font-weight: 500; }
+.level-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 0.5px solid #f0f0f0; font-size: 13px; }
+.level-row:last-child { border-bottom: none; }
+.level-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+.upcoming-item { font-size: 12px; color: #555; padding: 6px 0; border-bottom: 0.5px solid #f0f0f0; display: flex; justify-content: space-between; }
+.upcoming-item:last-child { border-bottom: none; }
 </style>
 </head>
 <body>
@@ -87,56 +122,131 @@ select { font-size: 13px; padding: 6px 10px; border: 0.5px solid #ccc; border-ra
   <div class="header-right" id="header-right">読み込み中...</div>
 </div>
 
-<div class="controls">
-  <select id="theme-select">
-    <option value="all">すべてのテーマ</option>
-    <option value="場所">場所</option>
-    <option value="交通・住まい">交通・住まい</option>
-  </select>
-  <select id="mode-select">
-    <option value="all">全問題</option>
-    <option value="weak">苦手のみ</option>
-  </select>
-  <button class="btn-restart" onclick="restartDeck()">最初から</button>
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('practice')">📝 練習</button>
+  <button class="tab-btn" onclick="switchTab('review')">🔄 復習</button>
+  <button class="tab-btn" onclick="switchTab('stats')">📊 統計</button>
 </div>
 
-<div class="progress-bg"><div class="progress-fill" id="prog" style="width:0%"></div></div>
-
-<div class="stats-row">
-  <div class="stat"><div class="stat-label">残り</div><div class="stat-value" id="s-remain">-</div></div>
-  <div class="stat"><div class="stat-label">正解</div><div class="stat-value" id="s-ok" style="color:#2e7d4f;">0</div></div>
-  <div class="stat"><div class="stat-label">不正解</div><div class="stat-value" id="s-ng" style="color:#c0392b;">0</div></div>
-  <div class="stat"><div class="stat-label">苦手</div><div class="stat-value" id="s-weak">0</div></div>
-</div>
-<div class="word-count" id="word-count"></div>
-
-<div class="main">
-  <div id="main-area">
-    <div class="q-card">
-      <div class="q-meta">
-        <span class="q-theme" id="q-theme">-</span>
-        <span class="q-num" id="q-num">-</span>
-      </div>
-      <div class="q-fr" id="q-fr">読み込み中...</div>
-      <div class="q-ja" id="q-ja"></div>
-    </div>
-    <div class="choices-grid" id="choices"></div>
-    <div id="result-row"></div>
-    <button class="next-btn" id="next-btn" onclick="nextCard()" disabled>次の問題へ →</button>
+<!-- 練習タブ -->
+<div id="tab-practice">
+  <div class="controls">
+    <select id="theme-select">
+      <option value="all">すべてのテーマ</option>
+      <option value="場所">場所</option>
+      <option value="交通・住まい">交通・住まい</option>
+      <option value="動詞：生死・危険">動詞：生死・危険</option>
+      <option value="動詞：通行・移動">動詞：通行・移動</option>
+      <option value="動詞：去来・出入り">動詞：去来・出入り</option>
+      <option value="動詞：接近・昇降">動詞：接近・昇降</option>
+      <option value="動詞：離合・到達">動詞：離合・到達</option>
+      <option value="動詞：接続・出し入れ">動詞：接続・出し入れ</option>
+      <option value="前置詞：時">前置詞：時</option>
+      <option value="語彙：時">語彙：時</option>
+      <option value="語彙：位置">語彙：位置</option>
+      <option value="語彙：方向と形">語彙：方向と形</option>
+      <option value="前置詞：場所">前置詞：場所</option>
+    </select>
+    <button class="btn-small" onclick="startPractice()">スタート</button>
   </div>
-
-  <div id="finish-area" style="display:none;">
-    <div class="finish-box">
-      <div class="finish-flag">
-        <div style="background:#002395;flex:1;"></div>
-        <div style="background:#fff;flex:1;border-left:0.5px solid #eee;border-right:0.5px solid #eee;"></div>
-        <div style="background:#ED2939;flex:1;"></div>
+  <div class="progress-bg"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-label">残り</div><div class="stat-value" id="s-remain">-</div></div>
+    <div class="stat"><div class="stat-label">正解</div><div class="stat-value" id="s-ok" style="color:#2e7d4f;">0</div></div>
+    <div class="stat"><div class="stat-label">不正解</div><div class="stat-value" id="s-ng" style="color:#c0392b;">0</div></div>
+    <div class="stat"><div class="stat-label">復習待ち</div><div class="stat-value" id="s-due">0</div></div>
+  </div>
+  <div class="word-count" id="word-count"></div>
+  <div class="main">
+    <div id="main-area">
+      <div class="q-card">
+        <div class="q-meta">
+          <span class="q-theme" id="q-theme">-</span>
+          <span class="q-num" id="q-num">-</span>
+        </div>
+        <div class="q-fr" id="q-fr">テーマを選んでスタートしてください</div>
+        <div class="q-ja" id="q-ja"></div>
       </div>
-      <div class="finish-title" id="finish-title"></div>
-      <div class="finish-sub" id="finish-sub"></div>
-      <div class="finish-btns">
-        <button class="btn-again" onclick="restartDeck()">もう一度</button>
-        <button class="btn-weak" onclick="studyWeak()">苦手だけ練習</button>
+      <div class="choices-grid" id="choices"></div>
+      <div id="result-row"></div>
+      <div class="anki-label" id="anki-label" style="display:none;">この問題の理解度は？</div>
+      <div class="anki-btns" id="anki-btns" style="display:none;">
+        <button class="anki-btn anki-again" onclick="ankiRate('again')">❌ わからない<br><small>すぐ再出題</small></button>
+        <button class="anki-btn anki-fuzzy" onclick="ankiRate('fuzzy')">🔶 うろ覚え<br><small>2日後</small></button>
+        <button class="anki-btn anki-perfect" onclick="ankiRate('perfect')">✅ 完璧<br><small>7日後</small></button>
+      </div>
+      <button class="next-btn" id="next-btn" onclick="nextCard()" disabled style="display:none;">次の問題へ →</button>
+    </div>
+    <div id="finish-area" style="display:none;">
+      <div class="finish-box">
+        <div class="finish-flag"><div style="background:#002395;flex:1;"></div><div style="background:#fff;flex:1;border-left:0.5px solid #eee;border-right:0.5px solid #eee;"></div><div style="background:#ED2939;flex:1;"></div></div>
+        <div class="finish-title" id="finish-title"></div>
+        <div class="finish-sub" id="finish-sub"></div>
+        <div class="finish-btns">
+          <button class="btn-again" onclick="startPractice()">もう一度</button>
+          <button class="btn-review-only" onclick="switchTab('review')">復習タブへ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 復習タブ -->
+<div id="tab-review" style="display:none;">
+  <div class="main">
+    <div class="review-banner">
+      <div class="review-banner-left">
+        <div class="review-banner-count" id="due-count">0</div>
+        <div class="review-banner-label">今日の復習問題</div>
+      </div>
+      <button class="btn-start-review" onclick="startReview()">復習スタート</button>
+    </div>
+    <div id="review-area" style="display:none;">
+      <div class="q-card" style="margin-top:0;">
+        <div class="q-meta">
+          <span class="q-theme" id="rq-theme">-</span>
+          <span class="q-level" id="rq-level">-</span>
+        </div>
+        <div class="q-fr" id="rq-fr"></div>
+        <div class="q-ja" id="rq-ja"></div>
+      </div>
+      <div class="choices-grid" id="r-choices"></div>
+      <div id="r-result-row"></div>
+      <div class="anki-label" id="r-anki-label" style="display:none;">この問題の理解度は？</div>
+      <div class="anki-btns" id="r-anki-btns" style="display:none;">
+        <button class="anki-btn anki-again" onclick="reviewAnkiRate('again')">❌ わからない<br><small>すぐ再出題</small></button>
+        <button class="anki-btn anki-fuzzy" onclick="reviewAnkiRate('fuzzy')">🔶 うろ覚え<br><small>2日後</small></button>
+        <button class="anki-btn anki-perfect" onclick="reviewAnkiRate('perfect')">✅ 完璧<br><small>7日後</small></button>
+      </div>
+    </div>
+    <div id="review-done" style="display:none;">
+      <div class="finish-box" style="margin-top:0;">
+        <div class="finish-flag"><div style="background:#002395;flex:1;"></div><div style="background:#fff;flex:1;border-left:0.5px solid #eee;border-right:0.5px solid #eee;"></div><div style="background:#ED2939;flex:1;"></div></div>
+        <div class="finish-title">復習完了！</div>
+        <div class="finish-sub" id="review-done-sub"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 統計タブ -->
+<div id="tab-stats" style="display:none;">
+  <div class="stats-tab">
+    <div class="stats-card">
+      <div class="stats-card-title">📊 習得レベル分布</div>
+      <div id="level-dist"></div>
+    </div>
+    <div class="stats-card">
+      <div class="stats-card-title">🗓 今後の復習予定</div>
+      <div id="upcoming-list"></div>
+    </div>
+    <div class="stats-card">
+      <div class="stats-card-title">ℹ️ 復習システムについて</div>
+      <div style="font-size:12px;color:#555;line-height:1.8;">
+        ✅ <b>完璧</b>：7日後に再出題<br>
+        🔶 <b>うろ覚え</b>：2日後に再出題<br>
+        ❌ <b>わからない</b>：次の復習セッションで即出題<br><br>
+        復習タブでは「今日が期限の問題」だけが出てきます。毎日少しずつ復習することで効率よく定着します。
       </div>
     </div>
   </div>
@@ -144,406 +254,491 @@ select { font-size: 13px; padding: 6px 10px; border: 0.5px solid #ccc; border-ra
 
 <script>
 /* =====================================================
-   ★ 問題データ ★
-   毎日ここに追加していきます！
-
-   追加フォーマット：
-   {
-     id:       "ユニークID（例：p43-1）",
-     theme:    "テーマ（場所／交通・住まい／前置詞 など）",
-     exercice: "参考書の番号（例：Ex.4）",
-     date:     "追加日（例：5/4）",
-     fr:       "フランス語文。空欄は (__) と書く",
-     ja:       "日本語訳",
-     answer:   "正解の単語",
-     choices:  ["正解を含む4つの選択肢"],
-     hint:     "解説・ポイント"
-   }
+   問題データ（毎日ここに追加）
 ===================================================== */
 const QUESTIONS = [
+  /* --- 場所 Ex.4 p.43 (5/4) --- */
+  {id:"p43-1",theme:"場所",exercice:"Ex.4",date:"5/4",fr:"Au (__) du film, il y a eu une panne d'électricité.",ja:"映画の途中で、停電になった。",answer:"milieu",choices:["milieu","bord","lieu","endroit"],hint:"au milieu de〜 ＝ 〜の途中で・真ん中で"},
+  {id:"p43-2",theme:"場所",exercice:"Ex.4",date:"5/4",fr:"Beaucoup de pays d'Afrique sont en (__) de développement.",ja:"アフリカの多くの国が発展途上にある。",answer:"voie",choices:["voie","lieu","bord","terre"],hint:"en voie de〜 ＝ 〜しつつある・〜の途上にある"},
+  {id:"p43-3",theme:"場所",exercice:"Ex.4",date:"5/4",fr:"D'où (__) que tu es toujours contre mon projet ?",ja:"なぜ君はいつもぼくの計画に反対するの？",answer:"vient",choices:["vient","sort","part","revient"],hint:"D'où vient que + 直説法 ＝ どうして〜なのか？"},
+  {id:"p43-4",theme:"場所",exercice:"Ex.4",date:"5/4",fr:"Il fait froid dehors, attends-moi à l'(__).",ja:"外は寒いから、中で待ってて。",answer:"intérieur",choices:["intérieur","extérieur","endroit","milieu"],hint:"à l'intérieur ＝ 中に・室内に（↔ dehors 外に）"},
+  {id:"p43-5",theme:"場所",exercice:"Ex.4",date:"5/4",fr:"Il y a trop de bruit ici, je vais (__).",ja:"ここはうるさすぎる、よそへ行きます。",answer:"ailleurs",choices:["ailleurs","dehors","là-bas","loin"],hint:"ailleurs ＝ ほかの場所に ／ d'ailleurs そのうえ"},
+  {id:"p43-6",theme:"場所",exercice:"Ex.4",date:"5/4",fr:"Je ne veux pas monter à (__) d'un bateau, j'ai le mal de mer.",ja:"私は船には乗りたくない、船酔いするから。",answer:"bord",choices:["bord","quai","pont","lieu"],hint:"à bord de〜 ＝ 〜に乗って（船・飛行機・車）"},
+  {id:"p43-7",theme:"場所",exercice:"Ex.4",date:"5/4",fr:"La population (__) ne cesse d'augmenter.",ja:"都市の人口は絶えず増えている。",answer:"urbaine",choices:["urbaine","rurale","locale","mondiale"],hint:"urbain(e) ＝ 都市の（↔ rural 農村の）"},
+  {id:"p43-8",theme:"場所",exercice:"Ex.4",date:"5/4",fr:"La voiture accidentée est restée sur (__) deux jours.",ja:"事故車は２日間現場に残されていた。",answer:"place",choices:["place","lieu","bord","terre"],hint:"sur place ＝ その場で・現地で"},
+  {id:"p43-9",theme:"場所",exercice:"Ex.4",date:"5/4",fr:"Le (__) de ce pays est riche en pétrole.",ja:"この国の地下には豊かな石油が埋蔵されている。",answer:"sous-sol",choices:["sous-sol","sol","terrain","fond"],hint:"sous-sol ＝ 地下（名詞）・地下室"},
+  {id:"p43-10",theme:"場所",exercice:"Ex.4",date:"5/4",fr:"Les documents traînent par (__).",ja:"資料が床に散らかっている。",answer:"terre",choices:["terre","sol","place","bord"],hint:"par terre ＝ 地面に・床に"},
+  {id:"p43-11",theme:"場所",exercice:"Ex.4",date:"5/4",fr:"Moi, à la (__) du café, je préférerais prendre un thé.",ja:"私としては、コーヒーではなくて紅茶のほうがいいんですが。",answer:"place",choices:["place","lieu","part","façon"],hint:"à la place de〜 ＝ 〜の代わりに（＝ au lieu de）"},
+  {id:"p43-12",theme:"場所",exercice:"Ex.4",date:"5/4",fr:"Ne prends pas cette rue, c'est une (__)!",ja:"この通りに入るな、行き止まりだよ。",answer:"impasse",choices:["impasse","voie","route","allée"],hint:"impasse ＝ 袋小路・行き詰まり"},
+  {id:"p43-13",theme:"場所",exercice:"Ex.4",date:"5/4",fr:"Notre prochaine réunion aura (__) le vendredi 17 juin.",ja:"私たちの次の会議は6月17日の金曜日に行なわれる。",answer:"lieu",choices:["lieu","place","part","cours"],hint:"avoir lieu ＝ 行われる・起こる（＝ se passer）"},
+  {id:"p43-14",theme:"場所",exercice:"Ex.4",date:"5/4",fr:"Nous avons (__) le village à la recherche d'un restaurant.",ja:"私たちはレストランを探して村中を歩きまわった。",answer:"parcouru",choices:["parcouru","traversé","visité","quitté"],hint:"parcourir ＝ 歩き回る・縦断する"},
+  {id:"p43-15",theme:"場所",exercice:"Ex.4",date:"5/4",fr:"Quand le bateau a fait naufrage, il y avait une centaine de passagers à (__).",ja:"その船が難破したとき、100名ほどの乗客がいた。",answer:"bord",choices:["bord","quai","pont","fond"],hint:"à bord ＝ 乗船・搭乗して"},
 
-  /* -----------------------------------------------
-     【場所】EXERCICE 4 p.43　追加日：5/4
-  ----------------------------------------------- */
-  {
-    id:"p43-1", theme:"場所", exercice:"Ex.4", date:"5/4",
-    fr:"Au (__) du film, il y a eu une panne d'électricité.",
-    ja:"映画の途中で、停電になった。",
-    answer:"milieu",
-    choices:["milieu","bord","lieu","endroit"],
-    hint:"au milieu de〜 ＝ 〜の途中で・真ん中で"
-  },
-  {
-    id:"p43-2", theme:"場所", exercice:"Ex.4", date:"5/4",
-    fr:"Beaucoup de pays d'Afrique sont en (__) de développement.",
-    ja:"アフリカの多くの国が発展途上にある。",
-    answer:"voie",
-    choices:["voie","lieu","bord","terre"],
-    hint:"en voie de〜 ＝ 〜しつつある・〜の途上にある（les pays en voie de développement 発展途上国）"
-  },
-  {
-    id:"p43-3", theme:"場所", exercice:"Ex.4", date:"5/4",
-    fr:"D'où (__) que tu es toujours contre mon projet ?",
-    ja:"なぜ君はいつもぼくの計画に反対するの？",
-    answer:"vient",
-    choices:["vient","sort","part","revient"],
-    hint:"D'où vient que + 直説法 ＝ どうして〜なのか？（やや文語的な表現）"
-  },
-  {
-    id:"p43-4", theme:"場所", exercice:"Ex.4", date:"5/4",
-    fr:"Il fait froid dehors, attends-moi à l'(__).",
-    ja:"外は寒いから、中で待ってて。",
-    answer:"intérieur",
-    choices:["intérieur","extérieur","endroit","milieu"],
-    hint:"à l'intérieur ＝ 中に・室内に（↔ dehors 外に）"
-  },
-  {
-    id:"p43-5", theme:"場所", exercice:"Ex.4", date:"5/4",
-    fr:"Il y a trop de bruit ici, je vais (__).",
-    ja:"ここはうるさすぎる、よそへ行きます。",
-    answer:"ailleurs",
-    choices:["ailleurs","dehors","là-bas","loin"],
-    hint:"ailleurs ＝ ほかの場所に ／ d'ailleurs そのうえ・ちなみに"
-  },
-  {
-    id:"p43-6", theme:"場所", exercice:"Ex.4", date:"5/4",
-    fr:"Je ne veux pas monter à (__) d'un bateau, j'ai le mal de mer.",
-    ja:"私は船には乗りたくない、船酔いするから。",
-    answer:"bord",
-    choices:["bord","quai","pont","lieu"],
-    hint:"à bord de〜 ＝ 〜に乗って（船・飛行機・車に使う）"
-  },
-  {
-    id:"p43-7", theme:"場所", exercice:"Ex.4", date:"5/4",
-    fr:"La population (__) ne cesse d'augmenter.",
-    ja:"都市の人口は絶えず増えている。",
-    answer:"urbaine",
-    choices:["urbaine","rurale","locale","mondiale"],
-    hint:"urbain(e) ＝ 都市の（↔ rural 農村の）"
-  },
-  {
-    id:"p43-8", theme:"場所", exercice:"Ex.4", date:"5/4",
-    fr:"La voiture accidentée est restée sur (__) deux jours.",
-    ja:"事故車は２日間現場に残されていた。",
-    answer:"place",
-    choices:["place","lieu","bord","terre"],
-    hint:"sur place ＝ その場で・現地で（La police est arrivée sur place. 警察は現場に到着した）"
-  },
-  {
-    id:"p43-9", theme:"場所", exercice:"Ex.4", date:"5/4",
-    fr:"Le (__) de ce pays est riche en pétrole.",
-    ja:"この国の地下には豊かな石油が埋蔵されている。",
-    answer:"sous-sol",
-    choices:["sous-sol","sol","terrain","fond"],
-    hint:"sous-sol ＝ 地下（名詞）・地下室"
-  },
-  {
-    id:"p43-10", theme:"場所", exercice:"Ex.4", date:"5/4",
-    fr:"Les documents traînent par (__).",
-    ja:"資料が床に散らかっている。",
-    answer:"terre",
-    choices:["terre","sol","place","bord"],
-    hint:"par terre ＝ 地面に・床に（cf. à terre 地面に倒れて）"
-  },
-  {
-    id:"p43-11", theme:"場所", exercice:"Ex.4", date:"5/4",
-    fr:"Moi, à la (__) du café, je préférerais prendre un thé.",
-    ja:"私としては、コーヒーではなくて紅茶のほうがいいんですが。",
-    answer:"place",
-    choices:["place","lieu","part","façon"],
-    hint:"à la place de〜 ＝ 〜の代わりに（＝ au lieu de〜）"
-  },
-  {
-    id:"p43-12", theme:"場所", exercice:"Ex.4", date:"5/4",
-    fr:"Ne prends pas cette rue, c'est une (__)!",
-    ja:"この通りに入るな、行き止まりだよ。",
-    answer:"impasse",
-    choices:["impasse","voie","route","allée"],
-    hint:"impasse ＝ 袋小路・行き詰まり（比喩的にも：c'est l'impasse 行き詰まりだ）"
-  },
-  {
-    id:"p43-13", theme:"場所", exercice:"Ex.4", date:"5/4",
-    fr:"Notre prochaine réunion aura (__) le vendredi 17 juin.",
-    ja:"私たちの次の会議は6月17日の金曜日に行なわれる。",
-    answer:"lieu",
-    choices:["lieu","place","part","cours"],
-    hint:"avoir lieu ＝ 行われる・起こる（＝ se passer）"
-  },
-  {
-    id:"p43-14", theme:"場所", exercice:"Ex.4", date:"5/4",
-    fr:"Nous avons (__) le village à la recherche d'un restaurant.",
-    ja:"私たちはレストランを探して村中を歩きまわった。",
-    answer:"parcouru",
-    choices:["parcouru","traversé","visité","quitté"],
-    hint:"parcourir ＝ 歩き回る・縦断する（p.p. parcouru）"
-  },
-  {
-    id:"p43-15", theme:"場所", exercice:"Ex.4", date:"5/4",
-    fr:"Quand le bateau a fait naufrage, il y avait une centaine de passagers à (__).",
-    ja:"その船が難破したとき、100名ほどの乗客がいた。",
-    answer:"bord",
-    choices:["bord","quai","pont","fond"],
-    hint:"à bord ＝ 乗船・搭乗して"
-  },
+  /* --- 交通・住まい Ex.38 p.111 (5/4) --- */
+  {id:"p111-1",theme:"交通・住まい",exercice:"Ex.38",date:"5/4",fr:"«(__) interdit à toute personne étrangère aux travaux»",ja:"工事関係者以外立ち入り禁止",answer:"accès",choices:["accès","entrée","passage","voie"],hint:"accès ＝ 接近・入口 ／「Accès interdit」立入禁止"},
+  {id:"p111-2",theme:"交通・住まい",exercice:"Ex.38",date:"5/4",fr:"Je ne sais pas, mais vous avez les (__) là-bas.",ja:"さあ、でもむこうに時刻表があります。",answer:"horaires",choices:["horaires","billets","cartes","plans"],hint:"horaire(s) ＝ 時刻表・時間割"},
+  {id:"p111-3",theme:"交通・住まい",exercice:"Ex.38",date:"5/4",fr:"Elles sont chères ces assiettes, dix euros (__) !",ja:"これらの皿は高い、１枚10ユーロもする！",answer:"pièce",choices:["pièce","unité","chacune","article"],hint:"pièce ＝ 部屋・1個 ／ Cela coûte un euro la pièce."},
+  {id:"p111-4",theme:"交通・住まい",exercice:"Ex.38",date:"5/4",fr:"J'ai acheté une (__) de toilette pour la salle de bains.",ja:"バスルームに洗面用キャビネットを買ったんだけど、気に入った？",answer:"armoire",choices:["armoire","meuble","étagère","table"],hint:"armoire ＝ 洋服タンス・収納棚"},
+  {id:"p111-5",theme:"交通・住まい",exercice:"Ex.38",date:"5/4",fr:"J'ai loué un appartement (__) avec douche, W.C. et cuisine.",ja:"私はシャワー、トイレ、台所のある家具つきアパルトマンを借りた。",answer:"meublé",choices:["meublé","armoire","équipé","aménagé"],hint:"meublé(e) ＝ 家具つきの"},
+  {id:"p111-6",theme:"交通・住まい",exercice:"Ex.38",date:"5/4",fr:"Je dois passer un (__) de fil.",ja:"電話をかけなければならない。",answer:"coup",choices:["coup","appel","message","signe"],hint:"passer un coup de fil ＝ 電話をかける（＝ téléphoner）"},
+  {id:"p111-7",theme:"交通・住まい",exercice:"Ex.38",date:"5/4",fr:"Je retourne à Paris demain, mais je n'ai pas encore fait les (__).",ja:"私はあすパリへ帰ります、でも荷づくりはまだです。",answer:"bagages",choices:["bagages","valises","paquets","affaires"],hint:"faire ses bagages ＝ 荷造りをする"},
+  {id:"p111-8",theme:"交通・住まい",exercice:"Ex.38",date:"5/4",fr:"J'étais en (__) de lire quand tu m'as téléphoné.",ja:"君が電話したとき、私は本を読んでいた。",answer:"train",choices:["train","cours","moment","milieu"],hint:"être en train de + 不定詞 ＝ 〜している最中である"},
+  {id:"p111-9",theme:"交通・住まい",exercice:"Ex.38",date:"5/4",fr:"N'entrez pas dans le salon, je vais passer l'(__).",ja:"応接間に入らないで、掃除機をかけるから。",answer:"aspirateur",choices:["aspirateur","balai","serpillière","brosse"],hint:"passer l'aspirateur ＝ 掃除機をかける"},
+  {id:"p111-10",theme:"交通・住まい",exercice:"Ex.38",date:"5/4",fr:"N'oublie pas d'éteindre l'(__) avant de partir.",ja:"出かけるまえに電気を消すのを忘れないでね。",answer:"électricité",choices:["électricité","lumière","lampe","feu"],hint:"éteindre l'électricité ＝ 電気を消す（↔ allumer）"},
+  {id:"p111-11",theme:"交通・住まい",exercice:"Ex.38",date:"5/4",fr:"Pour appeler vers l'étranger, vous devez (__) d'abord le 00.",ja:"海外に電話するなら、まず00をダイヤルしなければなりません。",answer:"composer",choices:["composer","former","taper","appuyer"],hint:"composer un numéro ＝ 電話番号をダイヤルする"},
+  {id:"p111-12",theme:"交通・住まい",exercice:"Ex.38",date:"5/4",fr:"Quelle est l'heure d'(__) du train ?",ja:"列車の到着時刻は何時ですか？",answer:"arrivée",choices:["arrivée","départ","passage","retard"],hint:"l'heure d'arrivée ＝ 到着時刻（↔ l'heure de départ 出発時刻）"},
+  {id:"p111-13",theme:"交通・住まい",exercice:"Ex.38",date:"5/4",fr:"Tu as porté ton manteau au (__) ?",ja:"コートはクリーニングへもって行った？",answer:"nettoyage",choices:["nettoyage","pressing","lavage","entretien"],hint:"nettoyage ＝ 掃除・クリーニング"},
+  {id:"p111-14",theme:"交通・住まい",exercice:"Ex.38",date:"5/4",fr:"—Tu es à la (__) ? —Oui, j'ai oublié mes clefs.",ja:"一家に入れないの？ —うん、鍵を忘れたんだ。",answer:"porte",choices:["porte","entrée","fenêtre","sortie"],hint:"être à la porte ＝ 締め出されている"},
+  {id:"p111-15",theme:"交通・住まい",exercice:"Ex.38",date:"5/4",fr:"Vous mettez une carte mémoire dans votre (__).",ja:"あなたのコンピューターにメモリーカードを入れてください。",answer:"ordinateur",choices:["ordinateur","appareil","téléphone","tablette"],hint:"ordinateur ＝ コンピュータ"},
 
-  /* -----------------------------------------------
-     【交通・住まい】EXERCICE 38 p.111　追加日：5/4
-  ----------------------------------------------- */
-  {
-    id:"p111-1", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
-    fr:"«(__) interdit à toute personne étrangère aux travaux»",
-    ja:"工事関係者以外立ち入り禁止",
-    answer:"accès",
-    choices:["accès","entrée","passage","voie"],
-    hint:"accès ＝ 接近・入口 ／「Accès interdit」立入禁止"
-  },
-  {
-    id:"p111-2", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
-    fr:"Je ne sais pas, mais vous avez les (__) là-bas.",
-    ja:"さあ、でもむこうに時刻表があります。",
-    answer:"horaires",
-    choices:["horaires","billets","cartes","plans"],
-    hint:"horaire(s) ＝ 時刻表・時間割（consulter l'horaire des trains 列車の時刻表を調べる）"
-  },
-  {
-    id:"p111-3", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
-    fr:"Elles sont chères ces assiettes, dix euros (__) !",
-    ja:"これらの皿は高い、１枚10ユーロもする！",
-    answer:"pièce",
-    choices:["pièce","unité","chacune","article"],
-    hint:"pièce ＝ 部屋・1個 ／ Cela coûte un euro la pièce. これは1個1ユーロする"
-  },
-  {
-    id:"p111-4", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
-    fr:"J'ai acheté une (__) de toilette pour la salle de bains.",
-    ja:"バスルームに洗面用キャビネットを買ったんだけど、気に入った？",
-    answer:"armoire",
-    choices:["armoire","meuble","étagère","table"],
-    hint:"armoire ＝ 洋服タンス・収納棚 ／ armoire à chaussures 靴箱"
-  },
-  {
-    id:"p111-5", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
-    fr:"J'ai loué un appartement (__) avec douche, W.C. et cuisine.",
-    ja:"私はシャワー、トイレ、台所のある家具つきアパルトマンを借りた。",
-    answer:"meublé",
-    choices:["meublé","armoire","équipé","aménagé"],
-    hint:"meublé(e) ＝ 家具つきの ／ un appartement meublé 家具つきアパルトマン"
-  },
-  {
-    id:"p111-6", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
-    fr:"Je dois passer un (__) de fil.",
-    ja:"電話をかけなければならない。",
-    answer:"coup",
-    choices:["coup","appel","message","signe"],
-    hint:"passer un coup de fil ＝ 電話をかける（＝ téléphoner）"
-  },
-  {
-    id:"p111-7", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
-    fr:"Je retourne à Paris demain, mais je n'ai pas encore fait les (__).",
-    ja:"私はあすパリへ帰ります、でも荷づくりはまだです。",
-    answer:"bagages",
-    choices:["bagages","valises","paquets","affaires"],
-    hint:"faire ses bagages ＝ 荷造りをする"
-  },
-  {
-    id:"p111-8", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
-    fr:"J'étais en (__) de lire quand tu m'as téléphoné.",
-    ja:"君が電話したとき、私は本を読んでいた。",
-    answer:"train",
-    choices:["train","cours","moment","milieu"],
-    hint:"être en train de + 不定詞 ＝ 〜している最中である（重要表現！）"
-  },
-  {
-    id:"p111-9", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
-    fr:"N'entrez pas dans le salon, je vais passer l'(__).",
-    ja:"応接間に入らないで、掃除機をかけるから。",
-    answer:"aspirateur",
-    choices:["aspirateur","balai","serpillière","brosse"],
-    hint:"passer l'aspirateur ＝ 掃除機をかける"
-  },
-  {
-    id:"p111-10", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
-    fr:"N'oublie pas d'éteindre l'(__) avant de partir.",
-    ja:"出かけるまえに電気を消すのを忘れないでね。",
-    answer:"électricité",
-    choices:["électricité","lumière","lampe","feu"],
-    hint:"éteindre l'électricité ＝ 電気を消す（↔ allumer 電気をつける）"
-  },
-  {
-    id:"p111-11", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
-    fr:"Pour appeler vers l'étranger, vous devez (__) d'abord le 00.",
-    ja:"海外に電話するなら、まず00をダイヤルしなければなりません。",
-    answer:"composer",
-    choices:["composer","former","taper","appuyer"],
-    hint:"composer un numéro ＝ 電話番号をダイヤルする"
-  },
-  {
-    id:"p111-12", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
-    fr:"Quelle est l'heure d'(__) du train ?",
-    ja:"列車の到着時刻は何時ですか？",
-    answer:"arrivée",
-    choices:["arrivée","départ","passage","retard"],
-    hint:"l'heure d'arrivée ＝ 到着時刻（↔ l'heure de départ 出発時刻）"
-  },
-  {
-    id:"p111-13", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
-    fr:"Tu as porté ton manteau au (__) ?",
-    ja:"コートはクリーニングへもって行った？",
-    answer:"nettoyage",
-    choices:["nettoyage","pressing","lavage","entretien"],
-    hint:"nettoyage ＝ 掃除・クリーニング ／ faire le nettoyage 掃除する"
-  },
-  {
-    id:"p111-14", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
-    fr:"—Tu es à la (__) ? —Oui, j'ai oublié mes clefs.",
-    ja:"一家に入れないの？ —うん、鍵を忘れたんだ。",
-    answer:"porte",
-    choices:["porte","entrée","fenêtre","sortie"],
-    hint:"être à la porte ＝ 締め出されている ／ mettre qn à la porte 追い出す"
-  },
-  {
-    id:"p111-15", theme:"交通・住まい", exercice:"Ex.38", date:"5/4",
-    fr:"Vous mettez une carte mémoire dans votre (__).",
-    ja:"あなたのコンピューターにメモリーカードを入れてください。",
-    answer:"ordinateur",
-    choices:["ordinateur","appareil","téléphone","tablette"],
-    hint:"ordinateur ＝ コンピュータ ／ ordinateur personnel パソコン"
-  },
+  /* --- 動詞：生死・危険 Ex.1 p.117 (5/5) --- */
+  {id:"p117-1-2",theme:"動詞：生死・危険",exercice:"Ex.1",date:"5/5",fr:"Elle lit un magazine pour (__) le temps.",ja:"彼女は時間をつぶすために雑誌を読んでいる。",answer:"tuer",choices:["tuer","passer","occuper","perdre"],hint:"tuer le temps ＝ 時間をつぶす"},
+  {id:"p117-1-3",theme:"動詞：生死・危険",exercice:"Ex.1",date:"5/5",fr:"Il (__) avoir oublié notre rendez-vous.",ja:"彼は私たちの約束を忘れたのかもしれない。",answer:"risque",choices:["risque","peut","doit","semble"],hint:"risquer de + 不定詞 ＝ 〜するおそれがある"},
+  {id:"p117-1-4",theme:"動詞：生死・危険",exercice:"Ex.1",date:"5/5",fr:"Il y a des nuages. Il (__) de pleuvoir.",ja:"雲がある。雨が降るかもしれない。",answer:"risque",choices:["risque","peut","va","commence"],hint:"risquer de + 不定詞 ＝ 〜するおそれがある"},
+  {id:"p117-1-5",theme:"動詞：生死・危険",exercice:"Ex.1",date:"5/5",fr:"On (__) de froid dans la salle d'attente.",ja:"待合室では寒くて死にそうだ。",answer:"meurt",choices:["meurt","tombe","souffre","risque"],hint:"mourir de froid ＝ 寒くて死にそうだ（比喩的表現）"},
+  {id:"p117-2-1",theme:"動詞：生死・危険",exercice:"Ex.1",date:"5/5",fr:"Je (__) l'authenticité de ce tableau.",ja:"私はこの絵画が本物だと確信している。",answer:"garantis",choices:["garantis","assure","promets","certifie"],hint:"garantir ＝ 保証する・請け合う"},
+  {id:"p117-2-2",theme:"動詞：生死・危険",exercice:"Ex.1",date:"5/5",fr:"J'(__), maintenant ! Voilà pourquoi il me l'a dit.",ja:"今わかった！だからこそ彼はそれを私に言ったんだ。",answer:"comprends",choices:["comprends","sais","réalise","remarque"],hint:"comprendre ＝ 理解する・わかる"},
+  {id:"p117-2-3",theme:"動詞：生死・危険",exercice:"Ex.1",date:"5/5",fr:"J'ai de quoi (__) avec ce que m'ont laissé mes parents.",ja:"両親が残してくれたもので食べていける。",answer:"vivre",choices:["vivre","survivre","exister","manger"],hint:"avoir de quoi vivre ＝ 生活するのに十分なものがある"},
+  {id:"p117-2-5",theme:"動詞：生死・危険",exercice:"Ex.1",date:"5/5",fr:"Tu (__) que Guy a gagné le premier prix au concours ?",ja:"Guyがコンクールで一等賞をとったのを知ってる？",answer:"sais",choices:["sais","connais","comprends","apprends"],hint:"savoir + que節 ＝ 〜を知っている"},
 
-  /* -----------------------------------------------
-     ★ 以降、毎日ここに追加していく ★
+  /* --- 動詞：通行・移動 Ex.2 p.119 (5/5) --- */
+  {id:"p119-1-1",theme:"動詞：通行・移動",exercice:"Ex.2",date:"5/5",fr:"Elle (__) à l'étranger pendant les vacances.",ja:"彼女は休暇中に外国へ行った。",answer:"s'est rendue",choices:["s'est rendue","est allée","est partie","a voyagé"],hint:"se rendre à〜 ＝ 〜へ行く（＝aller）"},
+  {id:"p119-1-2",theme:"動詞：通行・移動",exercice:"Ex.2",date:"5/5",fr:"Il (__) mon projet.",ja:"彼はちらっと私の計画を見た。",answer:"a parcouru",choices:["a parcouru","a regardé","a examiné","a lu"],hint:"parcourir ＝ ざっと目を通す"},
+  {id:"p119-1-4",theme:"動詞：通行・移動",exercice:"Ex.2",date:"5/5",fr:"C'est tout ce qui te (__) comme choix.",ja:"それがあなたの選択肢として残っているすべてだ。",answer:"reste",choices:["reste","passe","dure","suffit"],hint:"rester ＝ 残る（Il me reste... 私には〜が残っている）"},
+  {id:"p119-2-1",theme:"動詞：通行・移動",exercice:"Ex.2",date:"5/5",fr:"Il (__) les cinémas dans sa jeunesse.",ja:"彼は若い頃よく映画館に通っていた。",answer:"fréquentait",choices:["fréquentait","visitait","allait","parcourait"],hint:"fréquenter ＝ 〜に頻繁に通う"},
+  {id:"p119-2-2",theme:"動詞：通行・移動",exercice:"Ex.2",date:"5/5",fr:"Ils ne (__) devant aucune difficulté.",ja:"彼らはいかなる困難にも後退しないだろう。",answer:"reculeront",choices:["reculeront","tomberont","s'arrêteront","céderont"],hint:"reculer ＝ 退く・しりごみする"},
+  {id:"p119-2-3",theme:"動詞：通行・移動",exercice:"Ex.2",date:"5/5",fr:"On peut (__) de tabac.",ja:"タバコなしで済ますことができる。",answer:"se passer",choices:["se passer","reculer","rester","passer"],hint:"se passer de qc ＝ 〜なしで済ます"},
+  {id:"p119-2-4",theme:"動詞：通行・移動",exercice:"Ex.2",date:"5/5",fr:"Il (__) pour un homme intelligent.",ja:"彼は頭のいい人と思われていた。",answer:"passait",choices:["passait","restait","semblait","paraissait"],hint:"passer pour + 名詞 ＝ 〜として通っている"},
 
-     追加例：
-  {
-    id:"p000-1", theme:"テーマ名", exercice:"Ex.XX", date:"5/5",
-    fr:"文章。空欄は (__) と書く",
-    ja:"日本語訳",
-    answer:"正解",
-    choices:["正解","不正解1","不正解2","不正解3"],
-    hint:"解説"
-  },
-  ----------------------------------------------- */
+  /* --- 動詞：去来・出入り Ex.3 p.121 (5/5) --- */
+  {id:"p121-1-1",theme:"動詞：去来・出入り",exercice:"Ex.3",date:"5/5",fr:"Ce mot (__) souvent dans la conversation.",ja:"この言葉は会話の中でよく使われる。",answer:"revenait",choices:["revenait","sortait","apparaissait","circulait"],hint:"revenir ＝ 再び来る・繰り返し出てくる"},
+  {id:"p121-1-2",theme:"動詞：去来・出入り",exercice:"Ex.3",date:"5/5",fr:"La pluie (__) ses vêtements.",ja:"雨で彼の服はずぶ濡れになった。",answer:"a trempé",choices:["a trempé","a mouillé","a pénétré","a lavé"],hint:"tremper ＝ 浸す・ずぶ濡れにする（＝ mouiller）"},
+  {id:"p121-1-4",theme:"動詞：去来・出入り",exercice:"Ex.3",date:"5/5",fr:"L'éditeur (__) le dernier roman de cet écrivain le mois prochain.",ja:"出版社は来月この作家の最新小説を発行する。",answer:"sortira",choices:["sortira","publiera","éditera","imprimera"],hint:"sortir ＝ 出版される・発売される（＝ paraître）"},
+  {id:"p121-1-5",theme:"動詞：去来・出入り",exercice:"Ex.3",date:"5/5",fr:"Il est seul à (__) à la police.",ja:"彼だけが警察の追跡を免れた。",answer:"échapper",choices:["échapper","fuir","résister","survivre"],hint:"échapper à ＝ 逃れる・免れる"},
+  {id:"p121-2-1",theme:"動詞：去来・出入り",exercice:"Ex.3",date:"5/5",fr:"Combien (__) cette voiture ?",ja:"この車はいくらですか？",answer:"revient",choices:["revient","coûte","vaut","monte"],hint:"revenir à + 金額 ＝ 〜だけかかる（＝ coûter）"},
+  {id:"p121-2-2",theme:"動詞：去来・出入り",exercice:"Ex.3",date:"5/5",fr:"Votre date de naissance ne (__) jamais à mon grand-père.",ja:"私の祖父はあなたの誕生日を決して覚えていない。",answer:"reviendra",choices:["reviendra","viendra","restera","apparaîtra"],hint:"revenir à qn ＝ 〜の記憶によみがえる"},
+  {id:"p121-2-3",theme:"動詞：去来・出入り",exercice:"Ex.3",date:"5/5",fr:"(__) ma voiture du garage !",ja:"車をガレージから出しなさい。",answer:"Sors",choices:["Sors","Retire","Enlève","Tire"],hint:"sortir ＝ 出す（他動詞）・命令形（tu）はSors"},
+  {id:"p121-2-5",theme:"動詞：去来・出入り",exercice:"Ex.3",date:"5/5",fr:"D'où (__) le succès de cet acteur ?",ja:"この俳優の成功はどこから来るのか？",answer:"vient",choices:["vient","provient","résulte","naît"],hint:"D'où vient que〜 / venir de ＝ 〜から来る・〜が原因である"},
 
+  /* --- 動詞：接近・昇降 Ex.4 p.123 (5/5) --- */
+  {id:"p123-1-1",theme:"動詞：接近・昇降",exercice:"Ex.4",date:"5/5",fr:"On dirait qu'un orage (__).",ja:"嵐が近づいているようだ。",answer:"s'approche",choices:["s'approche","approche","arrive","vient"],hint:"s'approcher ＝ 近づく（自動詞・代動詞）"},
+  {id:"p123-1-2",theme:"動詞：接近・昇降",exercice:"Ex.4",date:"5/5",fr:"J'ai mal aux pieds, ces nouvelles chaussures me (__).",ja:"足が痛い、この新しい靴がきつすぎる。",answer:"serrent",choices:["serrent","blessent","font mal","compriment"],hint:"serrer ＝ 締めつける"},
+  {id:"p123-1-3",theme:"動詞：接近・昇降",exercice:"Ex.4",date:"5/5",fr:"Les enfants, ne (__) pas !",ja:"子どもたち、離れないで！",answer:"vous éloignez",choices:["vous éloignez","partez","bougez","sortez"],hint:"s'éloigner ＝ 遠ざかる（↔ s'approcher）"},
+  {id:"p123-1-5",theme:"動詞：接近・昇降",exercice:"Ex.4",date:"5/5",fr:"Son anniversaire (__) un dimanche cette année.",ja:"彼女の誕生日は今年日曜日にあたる。",answer:"tombe",choices:["tombe","est","arrive","se trouve"],hint:"tomber ＝ （日付が）〜にあたる"},
+  {id:"p123-2-1",theme:"動詞：接近・昇降",exercice:"Ex.4",date:"5/5",fr:"Hier, je (__) sur François devant le cinéma.",ja:"昨日映画館の前でたまたまフランソワに会った。",answer:"suis tombé",choices:["suis tombé","ai rencontré","ai trouvé","me suis retrouvé"],hint:"tomber sur qn ＝ たまたま出会う（＝ rencontrer par hasard）"},
+  {id:"p123-2-3",theme:"動詞：接近・昇降",exercice:"Ex.4",date:"5/5",fr:"Il faut que vous (__) le sport.",ja:"スポーツをやめてはいけない。",answer:"continuiez",choices:["continuiez","abandonniez","laissiez tomber","pratiquiez"],hint:"Ne laissez pas tomber le sport. → continuer で言い換え（接続法）"},
+  {id:"p123-2-5",theme:"動詞：接近・昇降",exercice:"Ex.4",date:"5/5",fr:"Quand je vais à Nice, mon ami veut toujours que je (__) chez lui.",ja:"ニースへ行くとき、友人はいつも私に彼の家に泊まってほしがる。",answer:"descende",choices:["descende","reste","loge","vienne"],hint:"descendre chez qn ＝ 人の家に泊まる（接続法）"},
+
+  /* --- 動詞：離合・到達 Ex.5 p.125 (5/5) --- */
+  {id:"p125-1-1",theme:"動詞：離合・到達",exercice:"Ex.5",date:"5/5",fr:"Quoi qu'il (__), vous pouvez compter sur moi.",ja:"何があっても、私を頼りにしていいよ。",answer:"arrive",choices:["arrive","se passe","vienne","soit"],hint:"quoi qu'il arrive ＝ 何が起ころうとも"},
+  {id:"p125-1-2",theme:"動詞：離合・到達",exercice:"Ex.5",date:"5/5",fr:"Il (__) son bureau vers 17 heures.",ja:"彼は17時ごろ事務所を出た。",answer:"a quitté",choices:["a quitté","a laissé","est parti de","a abandonné"],hint:"quitter ＝ 人と別れる・場所を離れる"},
+  {id:"p125-1-3",theme:"動詞：離合・到達",exercice:"Ex.5",date:"5/5",fr:"Ce livre (__) dix conférences sur l'Antarctique.",ja:"この本には南極についての講演が10本収められている。",answer:"réunit",choices:["réunit","contient","rassemble","comprend"],hint:"réunir ＝ 集める・結びつける"},
+  {id:"p125-1-4",theme:"動詞：離合・到達",exercice:"Ex.5",date:"5/5",fr:"Les deux frères (__) la même chambre.",ja:"二人の兄弟は同じ部屋を一緒に使っている。",answer:"partagent",choices:["partagent","occupent","divisent","réunissent"],hint:"partager ＝ 分ける・共有する"},
+  {id:"p125-2-2",theme:"動詞：離合・到達",exercice:"Ex.5",date:"5/5",fr:"Ses longues recherches (__) à un résultat satisfaisant.",ja:"彼の長い研究がついに満足のいく結果に至った。",answer:"ont abouti",choices:["ont abouti","ont mené","ont conduit","ont amené"],hint:"aboutir à ＝ 〜に通じる・〜という結果になる"},
+  {id:"p125-2-4",theme:"動詞：離合・到達",exercice:"Ex.5",date:"5/5",fr:"Nous ne (__) pas votre avis.",ja:"私たちはあなたの意見に賛成しない。",answer:"partageons",choices:["partageons","acceptons","suivons","comprenons"],hint:"partager l'avis de qn ＝ 人の意見を共有する・賛成する"},
+
+  /* --- 動詞：接続・出し入れ Ex.6 p.127 (5/5) --- */
+  {id:"p127-1-2",theme:"動詞：接続・出し入れ",exercice:"Ex.6",date:"5/5",fr:"(__) la télévision, s'il te plaît.",ja:"テレビを消してください。",answer:"Éteins",choices:["Éteins","Coupe","Arrête","Ferme"],hint:"éteindre ＝ 消す（ラジオ・テレビのスイッチを切る）"},
+  {id:"p127-1-3",theme:"動詞：接続・出し入れ",exercice:"Ex.6",date:"5/5",fr:"Je dois (__) de l'argent de la banque.",ja:"銀行からお金を引き出さなければならない。",answer:"retirer",choices:["retirer","sortir","prendre","tirer"],hint:"retirer de l'argent de la banque ＝ 銀行からお金を引き出す"},
+  {id:"p127-1-5",theme:"動詞：接続・出し入れ",exercice:"Ex.6",date:"5/5",fr:"Il ne faut pas que tu me (__) la parole.",ja:"私の話をさえぎってはいけない。",answer:"coupes",choices:["coupes","retires","reprennes","prennes"],hint:"couper la parole à qn ＝ 人の話をさえぎる"},
+  {id:"p127-2-1",theme:"動詞：接続・出し入れ",exercice:"Ex.6",date:"5/5",fr:"Catherine parle trop vite, on ne peut pas la (__).",ja:"カトリーヌは話すのが速すぎて、理解できない。",answer:"suivre",choices:["suivre","comprendre","écouter","entendre"],hint:"suivre ＝ 理解する（Vous me suivez ? 私の言っていることがおわかりですか？）"},
+  {id:"p127-2-4",theme:"動詞：接続・出し入れ",exercice:"Ex.6",date:"5/5",fr:"Qui (__) à notre directeur quand il va prendre sa retraite ?",ja:"定年退職する際、誰が我々の部長の後を継ぐのだろうか？",answer:"succédera",choices:["succédera","remplacera","suivra","viendra"],hint:"succéder à ＝ 〜のあとを継ぐ（＝ remplacer）"},
+
+  /* --- 前置詞：時 Ex.4 p.10-11 (5/5) --- */
+  {id:"p10-1-1",theme:"前置詞：時",exercice:"Ex.4",date:"5/5",fr:"Je pense qu'elle est (__) âge de prendre une décision toute seule.",ja:"彼女はひとりで決断できる年齢だと思う。",answer:"en",choices:["en","à","dans","pour"],hint:"en âge de + 不定詞 ＝ 〜できる年齢である"},
+  {id:"p10-1-2",theme:"前置詞：時",exercice:"Ex.4",date:"5/5",fr:"Je serai chez moi (__) neuf et dix heures.",ja:"9時から10時のあいだは家にいます。",answer:"entre",choices:["entre","pendant","de","pour"],hint:"entre A et B ＝ AとBのあいだに"},
+  {id:"p10-1-3",theme:"前置詞：時",exercice:"Ex.4",date:"5/5",fr:"Je vous ai attendu (__) deux semaines, puis je suis parti.",ja:"2週間待ちましたが、それから出発しました。",answer:"pendant",choices:["pendant","pour","durant","en"],hint:"pendant ＝ 〜のあいだに（継続した期間）"},
+  {id:"p10-1-4",theme:"前置詞：時",exercice:"Ex.4",date:"5/5",fr:"Nous sommes arrivés à Rennes (__) un peu moins de trois heures.",ja:"私たちは3時間足らずでレンヌに着いた。",answer:"en",choices:["en","dans","pour","pendant"],hint:"en ＝ 〜かかって（所要時間）"},
+  {id:"p10-1-5",theme:"前置詞：時",exercice:"Ex.4",date:"5/5",fr:"(__) combien de temps vous allez rester en France ?",ja:"どのくらいの予定でフランスに滞在するのですか？",answer:"Pour",choices:["Pour","Pendant","En","Durant"],hint:"pour ＝ 〜の予定で"},
+  {id:"p10-2-1",theme:"前置詞：時",exercice:"Ex.4",date:"5/5",fr:"Nous allons au cinéma le samedi ou le dimanche, jamais (__) semaine.",ja:"私たちは土曜か日曜に映画に行く、平日は決して行かない。",answer:"en",choices:["en","la","dans la","pendant la"],hint:"en semaine ＝ 平日に"},
+  {id:"p10-2-3",theme:"前置詞：時",exercice:"Ex.4",date:"5/5",fr:"Plus tard, tu feras ce que tu veux ; (__) le moment c'est moi qui commande !",ja:"あとは好きにしていい、今は私が命令する！",answer:"pour",choices:["pour","dans","en","à"],hint:"pour le moment ＝ 今のところ（＝ pour l'instant）"},
+  {id:"p10-2-4",theme:"前置詞：時",exercice:"Ex.4",date:"5/5",fr:"(__) quel âge as-tu continué tes études ?",ja:"何歳まで勉強を続けましたか？",answer:"Jusqu'à",choices:["Jusqu'à","Pour","Avant","En"],hint:"jusqu'à ＝ 〜まで（継続の終点を示す）"},
+  {id:"p10-3-3",theme:"前置詞：時",exercice:"Ex.4",date:"5/5",fr:"(__) six mois, le niveau de vie dans ce pays s'est beaucoup amélioré.",ja:"6ヶ月で、この国の生活水準はずいぶん向上した。",answer:"En",choices:["En","Pendant","Pour","Dans"],hint:"en ＝ 〜かかって（所要時間）/ pendant は継続期間"},
+  {id:"p10-3-4",theme:"前置詞：時",exercice:"Ex.4",date:"5/5",fr:"Un incendie a éclaté (__) pleine nuit.",ja:"真夜中に火災が発生した。",answer:"en",choices:["en","dans","au","à"],hint:"en pleine nuit ＝ 真夜中に（en plein jour 真昼に）"},
+  {id:"p10-3-5",theme:"前置詞：時",exercice:"Ex.4",date:"5/5",fr:"(__) votre départ, n'oubliez pas de rendre la clef à la réception.",ja:"出発の前に、フロントに鍵を返すのをお忘れなく。",answer:"Avant",choices:["Avant","Pour","Pendant","En"],hint:"avant ＝ 〜する前に"},
+
+  /* --- 語彙：時 Ex.1 p.36（5/2）, Ex.2 p.39（5/3）, Ex.3 p.41（5/4） --- */
+  {id:"p36-1",theme:"語彙：時",exercice:"Ex.1",date:"5/2",fr:"Couchons-nous vite, demain il faut se lever de bonne (__)!",ja:"すぐ寝ましょう、あすは早起きしなければならない。",answer:"heure",choices:["heure","fois","journée","matinée"],hint:"de bonne heure ＝ 朝早く"},
+  {id:"p36-2",theme:"語彙：時",exercice:"Ex.1",date:"5/2",fr:"De nos (__), il y a encore des gens qui ne savent ni lire ni écrire.",ja:"今日でもまだ文盲の人たちがいる。",answer:"jours",choices:["jours","temps","moments","jours"],hint:"de nos jours ＝ 今日では・現代では"},
+  {id:"p36-3",theme:"語彙：時",exercice:"Ex.1",date:"5/2",fr:"(__) fois que le petit frère lui enlève ses jouets, il se fâche.",ja:"彼は弟がおもちゃを横どりするたびに腹をたてる。",answer:"Chaque",choices:["Chaque","La première","Toutes les","Chaque"],hint:"chaque fois que + 直説法 ＝ 〜するたびに"},
+  {id:"p36-4",theme:"語彙：時",exercice:"Ex.1",date:"5/2",fr:"Il est à la (__) aimable et distant.",ja:"彼はにこやかだけどよそよそしいところがある。",answer:"fois",choices:["fois","fois","temps","même"],hint:"à la fois ＝ 同時に・〜でもあり〜でもある"},
+  {id:"p36-5",theme:"語彙：時",exercice:"Ex.1",date:"5/2",fr:"Il fait encore (__), même à huit heures du soir.",ja:"夜の8時なのにまだ明るい。",answer:"clair",choices:["clair","jour","lumière","soleil"],hint:"Il fait clair. ＝ 明るい（まだ明るい）"},
+  {id:"p36-9",theme:"語彙：時",exercice:"Ex.1",date:"5/2",fr:"Je te le dis une fois pour (__).",ja:"このことはもう二度と言わないからね。",answer:"toutes",choices:["toutes","toujours","jamais","bien"],hint:"une fois pour toutes ＝ これを最後に・きっぱりと"},
+  {id:"p36-10",theme:"語彙：時",exercice:"Ex.1",date:"5/2",fr:"Je vais au bureau en (__), jamais le dimanche.",ja:"平日は出勤します、日曜日は休みです。",answer:"semaine",choices:["semaine","jour","journée","semaine"],hint:"en semaine ＝ 平日に（↔ le week-end）"},
+  {id:"p36-11",theme:"語彙：時",exercice:"Ex.1",date:"5/2",fr:"La (__) tombe très tôt en décembre.",ja:"12月はとても早く夜がふける。",answer:"nuit",choices:["nuit","journée","matinée","soirée"],hint:"La nuit tombe. ＝ 日が暮れる（夜になる）"},
+  {id:"p36-12",theme:"語彙：時",exercice:"Ex.1",date:"5/2",fr:"Le dernier roman de Duras sortira d'un (__) à l'autre.",ja:"デュラスの最新作はまもなく出版される。",answer:"moment",choices:["moment","instant","temps","jour"],hint:"d'un moment à l'autre ＝ まもなく・今にも"},
+  {id:"p36-13",theme:"語彙：時",exercice:"Ex.1",date:"5/2",fr:"Les cerises sont de (__).",ja:"サクランボは今が旬です。",answer:"saison",choices:["saison","mode","temps","moment"],hint:"être de saison ＝ 旬である（Les huîtres sont de saison. カキは今が旬だ）"},
+  {id:"p36-15",theme:"語彙：時",exercice:"Ex.1",date:"5/2",fr:"Vous avez reçu ma lettre (__) du 2 juin ?",ja:"私からの6月2日付けの手紙は受けとりましたか？",answer:"datée",choices:["datée","écrite","envoyée","postée"],hint:"daté(e) du〜 ＝ 〜日付けの（手紙・書類などに）"},
+
+  {id:"p39-1",theme:"語彙：時",exercice:"Ex.2",date:"5/3",fr:"Ah ! la voilà enfin, il était (__).",ja:"やっと彼女がきた。間に合ったよ。",answer:"temps",choices:["temps","heure","moment","instant"],hint:"il était temps ＝ やっと間に合った・ちょうど良いタイミング"},
+  {id:"p39-2",theme:"語彙：時",exercice:"Ex.2",date:"5/3",fr:"À l'(__), venez dîner.",ja:"そのうち夕食に来てください。",answer:"occasion",choices:["occasion","instant","moment","fois"],hint:"à l'occasion ＝ 機会があれば・そのうち"},
+  {id:"p39-3",theme:"語彙：時",exercice:"Ex.2",date:"5/3",fr:"Dans un (__) temps, il n'écoutait pas ce que je lui disais.",ja:"はじめのうち、彼は私の言うことに耳をかさなかった。",answer:"premier",choices:["premier","bon","tel","certain"],hint:"dans un premier temps ＝ はじめのうち・最初は"},
+  {id:"p39-4",theme:"語彙：時",exercice:"Ex.2",date:"5/3",fr:"Elle flânait dans la rue pour (__) le temps.",ja:"彼女は時間つぶしに街を散歩していた。",answer:"tuer",choices:["tuer","passer","perdre","occuper"],hint:"tuer le temps ＝ 時間をつぶす"},
+  {id:"p39-5",theme:"語彙：時",exercice:"Ex.2",date:"5/3",fr:"Elle n'est plus en très (__) termes avec Jacques.",ja:"彼女はもうジャックとはあまりうまくいってない。",answer:"bons",choices:["bons","belles","bonnes","grands"],hint:"être en bons termes avec qn ＝ 人と仲が良い（↔ en mauvais termes）"},
+  {id:"p39-6",theme:"語彙：時",exercice:"Ex.2",date:"5/3",fr:"Elle travaille à temps (__) dans un supermarché.",ja:"彼女はスーパーのパートをしている。",answer:"partiel",choices:["partiel","plein","complet","libre"],hint:"à temps partiel ＝ パートタイムで（↔ à temps plein フルタイムで）"},
+  {id:"p39-7",theme:"語彙：時",exercice:"Ex.2",date:"5/3",fr:"Il n'est pas (__) qu'il manque à sa parole.",ja:"彼はよく約束を破るんだ。",answer:"rare",choices:["rare","étonnant","surprenant","impossible"],hint:"Il n'est pas rare que + 接続法 ＝ 〜するのはまれでない（つまりよくある）"},
+  {id:"p39-9",theme:"語彙：時",exercice:"Ex.2",date:"5/3",fr:"Le dimanche, le plus (__) je vais à la piscine.",ja:"日曜日はたいていプールへ行きます。",answer:"souvent",choices:["souvent","souvent","toujours","parfois"],hint:"le plus souvent ＝ たいていの場合"},
+  {id:"p39-11",theme:"語彙：時",exercice:"Ex.2",date:"5/3",fr:"(__) que la pluie a cessé de tomber, nous allons pouvoir sortir.",ja:"雨がやんだのだから、私たちは外出できそうだ。",answer:"Maintenant",choices:["Maintenant","Puisque","Depuis","Quand"],hint:"maintenant que + 直説法 ＝ 〜である今・だから（＝ puisque）"},
+  {id:"p39-13",theme:"語彙：時",exercice:"Ex.2",date:"5/3",fr:"Tu as acheté une voiture neuve ou d'(__) ?",ja:"君は新車を買ったの？それとも中古車？",answer:"occasion",choices:["occasion","seconde main","vieux","bas prix"],hint:"d'occasion ＝ 中古の（↔ neuf 新品の）"},
+  {id:"p39-14",theme:"語彙：時",exercice:"Ex.2",date:"5/3",fr:"Tu m'accompagnes au concert ? — Jamais de la (__).",ja:"私をコンサートに連れてってくれる？ — 絶対いや。",answer:"vie",choices:["vie","vie","mort","façon"],hint:"jamais de la vie ＝ 絶対にない・絶対いや"},
+  {id:"p39-15",theme:"語彙：時",exercice:"Ex.2",date:"5/3",fr:"Tu sais, des accidents de la route, ça (__) tous les jours.",ja:"あのね、交通事故なんて毎日のことだよ。",answer:"arrive",choices:["arrive","se passe","se produit","survient"],hint:"ça arrive ＝ そういうことはよくある（Ça arrive souvent. それはよくあることだ）"},
+
+  {id:"p41-1",theme:"語彙：時",exercice:"Ex.3",date:"5/4",fr:"Elle est (__) à comprendre ce qu'on lui dit.",ja:"彼女はのみこみが悪い。",answer:"lente",choices:["lente","longue","tardive","difficile"],hint:"être lent(e) à + 不定詞 ＝ 〜するのが遅い"},
+  {id:"p41-2",theme:"語彙：時",exercice:"Ex.3",date:"5/4",fr:"Françoise est toujours bien (__).",ja:"フランソワーズはいつもいい服を着ている。",answer:"habillée",choices:["habillée","coiffée","maquillée","soignée"],hint:"être bien habillé(e) ＝ いい服を着ている・おしゃれな"},
+  {id:"p41-3",theme:"語彙：時",exercice:"Ex.3",date:"5/4",fr:"Il était très orgueilleux, mais, au bout du (__), ce n'était pas un mauvais homme.",ja:"彼はとても高慢だったが、結局悪い男ではなかった。",answer:"compte",choices:["compte","bout","fin","fond"],hint:"au bout du compte ＝ 結局・つまるところ（＝ après tout）"},
+  {id:"p41-4",theme:"語彙：時",exercice:"Ex.3",date:"5/4",fr:"Il n'est jamais trop (__) pour commencer l'apprentissage des langues étrangères.",ja:"いくつになっても外国語学習を始めることはできます。",answer:"tard",choices:["tard","vieux","lent","tôt"],hint:"Il n'est jamais trop tard pour... ＝ 〜するのに遅すぎることはない"},
+  {id:"p41-6",theme:"語彙：時",exercice:"Ex.3",date:"5/4",fr:"J'espère que, d'(__) demain, le temps va s'améliorer.",ja:"あすまでに天気が回復すればいいんだけど。",answer:"ici",choices:["ici","avant","depuis","maintenant"],hint:"d'ici + 時間表現 ＝ 〜まで・〜以内に（d'ici fin juin 6月末までに）"},
+  {id:"p41-7",theme:"語彙：時",exercice:"Ex.3",date:"5/4",fr:"Judith est toujours habillée à la (__) mode.",ja:"ジュディットはいつも最新流行の服を着ている。",answer:"dernière",choices:["dernière","nouvelle","grande","première"],hint:"à la dernière mode ＝ 最新流行の"},
+  {id:"p41-8",theme:"語彙：時",exercice:"Ex.3",date:"5/4",fr:"La réunion a pris (__) très tard.",ja:"その会議は長引いた。",answer:"fin",choices:["fin","terme","bout","temps"],hint:"prendre fin ＝ 終わる（La réunion a pris fin à 19 heures. 会議は19時に終わった）"},
+  {id:"p41-10",theme:"語彙：時",exercice:"Ex.3",date:"5/4",fr:"Même si tu n'es pas d'accord, j'irai jusqu'au (__).",ja:"君が賛成しなくても、やりとおします。",answer:"bout",choices:["bout","fin","terme","fond"],hint:"aller jusqu'au bout ＝ やり通す・最後までやる"},
+  {id:"p41-12",theme:"語彙：時",exercice:"Ex.3",date:"5/4",fr:"Ne (__) pas à répondre à mon courriel.",ja:"すぐに私のメールに返事をください。",answer:"tardez",choices:["tardez","hésitez","oubliez","manquez"],hint:"tarder à + 不定詞 ＝ 〜するのが遅れる（Ne tardez pas à... すぐに〜してください）"},
+  {id:"p41-13",theme:"語彙：時",exercice:"Ex.3",date:"5/4",fr:"On se verra de (__) dimanche prochain.",ja:"また来週の日曜日に会いましょう。",answer:"nouveau",choices:["nouveau","plus","suite","même"],hint:"de nouveau ＝ ふたたび・また（＝ encore）"},
+
+  /* --- 語彙：位置 Ex.5 p.45（5/5）--- */
+  {id:"p45-1",theme:"語彙：位置",exercice:"Ex.5",date:"5/5",fr:"À l'(__) des négociations, les partenaires sociaux ont signé un accord.",ja:"交渉のあと労使双方は協約書にサインした。",answer:"issue",choices:["issue","fin","terme","bout"],hint:"à l'issue de qc ＝ 〜が終わってから・〜の結果として"},
+  {id:"p45-2",theme:"語彙：位置",exercice:"Ex.5",date:"5/5",fr:"À quelques minutes (__), tu rencontrais Hélène.",ja:"数分のちがいでエレーヌに会えたのに。",answer:"près",choices:["près","loin","avant","après"],hint:"à quelques minutes près ＝ 数分の差で（↔ à peu près おおよそ）"},
+  {id:"p45-3",theme:"語彙：位置",exercice:"Ex.5",date:"5/5",fr:"Elle ne voit pas plus loin que le (__) de son nez.",ja:"彼女は視野が狭すぎる。",answer:"bout",choices:["bout","fond","coin","bord"],hint:"ne pas voir plus loin que le bout de son nez ＝ 視野が狭い"},
+  {id:"p45-5",theme:"語彙：位置",exercice:"Ex.5",date:"5/5",fr:"Il habite dans un immeuble de quatre (__).",ja:"彼は5階建ての建物に住んでいる。",answer:"étages",choices:["étages","niveaux","planchers","sols"],hint:"un immeuble de [cinq] étages ＝ [6]階建てのビル（フランス語は1階=rez-de-chaussée）"},
+  {id:"p45-6",theme:"語彙：位置",exercice:"Ex.5",date:"5/5",fr:"Il manque l'acte de naissance : à cela (__), le dossier est complet.",ja:"出生証明書がない。それをのぞけば、書類はそろっている。",answer:"près",choices:["près","côté","part","loin"],hint:"à cela près ＝ それをのぞけば・ただし〜の点で（= à quelques détails près）"},
+  {id:"p45-7",theme:"語彙：位置",exercice:"Ex.5",date:"5/5",fr:"Il s'habille n'importe (__).",ja:"彼は服の着こなしについて無頓着だ。",answer:"comment",choices:["comment","quoi","où","quand"],hint:"n'importe comment ＝ どんなふうにでも・でたらめに"},
+  {id:"p45-8",theme:"語彙：位置",exercice:"Ex.5",date:"5/5",fr:"Le dernier volume de la collection Molière vient de (__).",ja:"モリエール作品集の最終巻は出たばかりです。",answer:"sortir",choices:["sortir","paraître","publier","éditer"],hint:"venir de + 不定詞 ＝ 〜したばかりである"},
+  {id:"p45-9",theme:"語彙：位置",exercice:"Ex.5",date:"5/5",fr:"Le portugais est (__) de l'espagnol.",ja:"ポルトガル語はスペイン語に似ている。",answer:"proche",choices:["proche","voisin","proche","semblable"],hint:"être proche de ＝ 〜に近い・〜に類似した"},
+  {id:"p45-10",theme:"語彙：位置",exercice:"Ex.5",date:"5/5",fr:"Les travaux sont à (__) près terminés.",ja:"工事はほぼ完成している。",answer:"peu",choices:["peu","peine","presque","environ"],hint:"à peu près ＝ ほぼ・およそ（＝ presque）"},
+  {id:"p45-11",theme:"語彙：位置",exercice:"Ex.5",date:"5/5",fr:"Mon travail est (__) d'être fini, j'ai à peine commencé.",ja:"私の仕事は終わるどころか、始めたばかりだよ。",answer:"loin",choices:["loin","proche","loin","près"],hint:"être loin de + 不定詞 ＝ 〜するどころではない"},
+  {id:"p45-12",theme:"語彙：位置",exercice:"Ex.5",date:"5/5",fr:"Nous partons aux (__) du 5 août sans doute.",ja:"私たちはおそらく8月5日ごろ出発するでしょう。",answer:"environs",choices:["environs","alentours","environ","aux environs"],hint:"aux environs de ＝ 〜ごろ・〜の近くに（La dépense s'élève aux environs de mille euros.）"},
+  {id:"p45-13",theme:"語彙：位置",exercice:"Ex.5",date:"5/5",fr:"On attend avec impatience la (__) de son nouveau roman.",ja:"彼の新しい小説の出版が待ち遠しい。",answer:"sortie",choices:["sortie","publication","parution","édition"],hint:"la sortie de son prochain roman ＝ 彼（女）の次の小説の発売"},
+  {id:"p45-14",theme:"語彙：位置",exercice:"Ex.5",date:"5/5",fr:"Pierre connaît ce quartier à (__).",ja:"ピエールはこの辺の地理にとても詳しい。",answer:"fond",choices:["fond","fond","fond","fond"],hint:"à fond ＝ 徹底的に・よく（Ma mère a fait le ménage à fond. 私の母は徹底的に掃除した）"},
+  {id:"p45-15",theme:"語彙：位置",exercice:"Ex.5",date:"5/5",fr:"Prêtez-moi un peu d'argent, (__) quoi je ne pourrai pas payer le loyer.",ja:"少しお金を貸してください、さもないと家賃が払えない。",answer:"sans",choices:["sans","sinon","autrement","faute"],hint:"sans quoi ＝ さもなければ（＝ sinon）"},
+
+  /* --- 語彙：方向と形 Ex.6 p.47（5/5） --- */
+  {id:"p47-1",theme:"語彙：方向と形",exercice:"Ex.6",date:"5/5",fr:"À (__) de chez moi, il y a un bon restaurant.",ja:"近所においしいレストランがある。",answer:"côté",choices:["côté","proximité","environs","voisinage"],hint:"à côté de〜 ＝ 〜の近くに・〜のそばに"},
+  {id:"p47-2",theme:"語彙：方向と形",exercice:"Ex.6",date:"5/5",fr:"Arrête de marcher de long en (__) comme ça.",ja:"そんな風に同じところを行ったり来たりするのはやめてよ。",answer:"large",choices:["large","court","long","travers"],hint:"de long en large ＝ 行ったり来たりして"},
+  {id:"p47-3",theme:"語彙：方向と形",exercice:"Ex.6",date:"5/5",fr:"Ce lac est (__) de 80 mètres.",ja:"この湖は深さ80メートルある。",answer:"profond",choices:["profond","haut","large","long"],hint:"être profond de〜 ＝ 深さ〜がある（Le puits est profond de cinq mètres.）"},
+  {id:"p47-4",theme:"語彙：方向と形",exercice:"Ex.6",date:"5/5",fr:"Ce médicament existe aussi sous (__) de cachets, c'est plus pratique.",ja:"この薬はカプセル状のものもある、そちらのほうが飲みやすい。",answer:"forme",choices:["forme","type","sorte","aspect"],hint:"sous forme de qc ＝ 〜の形をとった（Ce médicament existe sous forme de comprimés.）"},
+  {id:"p47-5",theme:"語彙：方向と形",exercice:"Ex.6",date:"5/5",fr:"Ah, non, vous allez dans une mauvaise (__).",ja:"いいえ、あなたは方角をまちがっています。",answer:"direction",choices:["direction","sens","côté","route"],hint:"direction ＝ 方向・管理（en direction de + 場所 〜の方向に）"},
+  {id:"p47-6",theme:"語彙：方向と形",exercice:"Ex.6",date:"5/5",fr:"C'est une statue (__) nature, n'est-ce pas ?",ja:"これは実物大の彫像ですよね？",answer:"grandeur",choices:["grandeur","taille","format","mesure"],hint:"grandeur nature ＝ 実物大の（un dessin grandeur nature 実物大のデッサン）"},
+  {id:"p47-7",theme:"語彙：方向と形",exercice:"Ex.6",date:"5/5",fr:"Dans une glace, on se voit à l'(__).",ja:"鏡だと左右反対に見える。",answer:"envers",choices:["envers","inverse","contraire","opposé"],hint:"à l'envers ＝ さかさまに・裏返しに（↔ à l'endroit 正しく）"},
+  {id:"p47-8",theme:"語彙：方向と形",exercice:"Ex.6",date:"5/5",fr:"Il se trompe sur toute la (__).",ja:"彼は全面的にまちがっている。",answer:"ligne",choices:["ligne","ligne","ligne","ligne"],hint:"sur toute la ligne ＝ 全線にわたって・完全に（＝ complètement）"},
+  {id:"p47-9",theme:"語彙：方向と形",exercice:"Ex.6",date:"5/5",fr:"Ils ne dépensent pas, ils mettent de l'argent de (__) pour plus tard.",ja:"彼らは浪費しない、将来のためにお金をためている。",answer:"côté",choices:["côté","part","réserve","fond"],hint:"mettre de l'argent de côté ＝ 貯金する・別にとっておく"},
+  {id:"p47-10",theme:"語彙：方向と形",exercice:"Ex.6",date:"5/5",fr:"Je ne suis pas fatigué, au (__), je suis en pleine forme.",ja:"私は疲れてはいない、それどころか絶好調だ。",answer:"contraire",choices:["contraire","contraire","contraire","contraire"],hint:"au contraire ＝ 反対に・それどころか"},
+  {id:"p47-11",theme:"語彙：方向と形",exercice:"Ex.6",date:"5/5",fr:"La rue est à (__) unique.",ja:"通りは一方通行です。",answer:"sens",choices:["sens","direction","voie","passage"],hint:"sens unique ＝ 一方通行の通り（une rue à sens unique）"},
+  {id:"p47-12",theme:"語彙：方向と形",exercice:"Ex.6",date:"5/5",fr:"On parlait à voix (__) dans la salle des pompes funèbres.",ja:"葬儀会場で人々は声をひそめて話していた。",answer:"basse",choices:["basse","basse","douce","silencieuse"],hint:"à voix basse ＝ 小さい声で（↔ à voix haute 大きな声で）"},
+  {id:"p47-13",theme:"語彙：方向と形",exercice:"Ex.6",date:"5/5",fr:"Quelle est la (__) de cette jupe ?",ja:"このスカートの丈はいくらですか？",answer:"longueur",choices:["longueur","taille","hauteur","largeur"],hint:"longueur ＝ 長さ・縦（La table fait deux mètres de longueur.）"},
+  {id:"p47-14",theme:"語彙：方向と形",exercice:"Ex.6",date:"5/5",fr:"Regarde, c'est joli ces arbres, le (__) de la route.",ja:"見て、木々がきれいだよ、街道沿いは。",answer:"long",choices:["long","bord","côté","fond"],hint:"le long de qc ＝ 〜に沿って（Il aime marcher le long des quais de la Seine.）"},
+  {id:"p47-15",theme:"語彙：方向と形",exercice:"Ex.6",date:"5/5",fr:"Son plan commence à prendre (__).",ja:"彼の計画は具体化しはじめた。",answer:"forme",choices:["forme","forme","forme","forme"],hint:"prendre forme ＝ 形をなす・具体化する（Notre projet va prendre forme.）"},
+
+  /* --- 前置詞：場所 Ex.1 p.5（5/2）, Ex.2 p.7（5/3）, Ex.3 p.9（5/4） --- */
+  {id:"p5-1-1",theme:"前置詞：場所",exercice:"Ex.1",date:"5/2",fr:"Ces enfants ne tiennent pas (__) place.",ja:"この子どもたちはじっとしていられない。",answer:"en",choices:["en","à","dans","de"],hint:"tenir en place ＝ じっとしている（落ち着いている）"},
+  {id:"p5-1-2",theme:"前置詞：場所",exercice:"Ex.1",date:"5/2",fr:"C'est l'heure de se mettre (__) table.",ja:"食卓につく時間だ。",answer:"à",choices:["à","en","dans","sur"],hint:"se mettre à table ＝ 食卓につく（Passons à table. 食卓に移りましょう）"},
+  {id:"p5-1-3",theme:"前置詞：場所",exercice:"Ex.1",date:"5/2",fr:"Cette chanson est très à la mode (__) les jeunes.",ja:"この歌は若者たちにとても流行っている。",answer:"chez",choices:["chez","pour","parmi","dans"],hint:"chez〜 ＝ 〜の間で・〜においては（Ce sac vient de chez Louis Vuitton.）"},
+  {id:"p5-1-4",theme:"前置詞：場所",exercice:"Ex.1",date:"5/2",fr:"Examinons tous les éléments du problème (__) plus près.",ja:"問題のすべての要素をより詳しく調べよう。",answer:"de",choices:["de","à","en","plus"],hint:"de près ＝ 近くから・詳しく（↔ de loin 遠くから）"},
+  {id:"p5-1-5",theme:"前置詞：場所",exercice:"Ex.1",date:"5/2",fr:"J'ai lu cet article (__) le journal.",ja:"私はこの記事を新聞で読んだ。",answer:"dans",choices:["dans","en","sur","de"],hint:"dans le journal ＝ 新聞で（dans + 定冠詞 + 名詞：限定的な広がり）"},
+  {id:"p5-2-1",theme:"前置詞：場所",exercice:"Ex.1",date:"5/2",fr:"Il fait froid dehors, rentrons (__) l'intérieur.",ja:"外は寒い、室内に戻りましょう。",answer:"à",choices:["à","dans","en","vers"],hint:"à l'intérieur ＝ 室内に・内部に"},
+  {id:"p5-2-2",theme:"前置詞：場所",exercice:"Ex.1",date:"5/2",fr:"Il s'y connaît bien (__) littérature japonaise.",ja:"彼は日本文学に精通している。",answer:"en",choices:["en","dans","de","à"],hint:"en + 無冠詞名詞 ＝ 〜の分野で（Elle est étudiante en lettres.）"},
+  {id:"p5-2-3",theme:"前置詞：場所",exercice:"Ex.1",date:"5/2",fr:"J'ai fait toute ma carrière (__) le cinéma.",ja:"私は映画の世界でずっとキャリアを積んできた。",answer:"dans",choices:["dans","en","pour","à"],hint:"dans + 定冠詞 + 名詞 ＝ 〜の業界・世界で"},
+  {id:"p5-2-4",theme:"前置詞：場所",exercice:"Ex.1",date:"5/2",fr:"Jean habite juste au-dessus de (__) moi.",ja:"ジャンは私のすぐ上に住んでいる。",answer:"chez",choices:["chez","de","sur","à"],hint:"chez moi ＝ 私の家で（au-dessus de chez moi 私の家の上に）"},
+  {id:"p5-3-1",theme:"前置詞：場所",exercice:"Ex.1",date:"5/2",fr:"Alain connaît (__) fond la géographie de la France.",ja:"アランはフランスの地理を熟知している。",answer:"à",choices:["à","en","de","par"],hint:"à fond ＝ 徹底的に・よく（connaître à fond 熟知している）"},
+  {id:"p5-3-2",theme:"前置詞：場所",exercice:"Ex.1",date:"5/2",fr:"Cet ascenseur est (__) service.",ja:"このエレベーターは使用不能です。",answer:"hors",choices:["hors","en","de","sans"],hint:"hors service ＝ 使用不能・故障中（↔ en service）"},
+  {id:"p5-3-3",theme:"前置詞：場所",exercice:"Ex.1",date:"5/2",fr:"Karine n'aime pas chanter (__) public.",ja:"カリーヌは人前で歌うのが好きではない。",answer:"en",choices:["en","en","en","en"],hint:"en public ＝ 人前で（Elle a peur de parler en public.）"},
+  {id:"p5-3-4",theme:"前置詞：場所",exercice:"Ex.1",date:"5/2",fr:"Laissez ça (__) côté pour l'instant, vous vous en occuperez plus tard.",ja:"今はそれをわきに置いておいてください、後で扱います。",answer:"de",choices:["de","à","sur","par"],hint:"de côté ＝ わきに・別にとっておく（mettre de l'argent de côté 貯金する）"},
+  {id:"p5-3-5",theme:"前置詞：場所",exercice:"Ex.1",date:"5/2",fr:"Posez les cartons (__) les murs, je les rangerai après.",ja:"段ボールを壁際に置いてください、後で片付けます。",answer:"contre",choices:["contre","à","sur","près de"],hint:"contre ＝ 〜にぴたりとつけて・のそばに（Poussez le lit contre le mur.）"},
+
+  {id:"p7-1-1",theme:"前置詞：場所",exercice:"Ex.2",date:"5/3",fr:"Cet homme a un lourd passé (__) lui.",ja:"この男は重い過去を背負っている。",answer:"derrière",choices:["derrière","sur","avec","en"],hint:"derrière ＝ 〜のうしろに・裏に（Elle a un passé mouvementé derrière elle.）"},
+  {id:"p7-1-2",theme:"前置詞：場所",exercice:"Ex.2",date:"5/3",fr:"Cette route va bien (__) le Nord.",ja:"この道はちゃんと北へ向かっている。",answer:"vers",choices:["vers","au","en","dans"],hint:"vers ＝ 〜の方へ（Ce train roule vers Dijon.）"},
+  {id:"p7-1-3",theme:"前置詞：場所",exercice:"Ex.2",date:"5/3",fr:"Considérons le problème (__) un jour tout à fait nouveau.",ja:"この問題をまったく新しい視点から考えてみよう。",answer:"sous",choices:["sous","dans","de","en"],hint:"sous + 観点 ＝ 〜の観点から（Il ne faut pas voir les choses sous un mauvais jour.）"},
+  {id:"p7-1-4",theme:"前置詞：場所",exercice:"Ex.2",date:"5/3",fr:"Couchée (__) le dos dans son lit, elle lit un magazine.",ja:"ベッドに仰向けになって、彼女は雑誌を読んでいる。",answer:"sur",choices:["sur","sur","sur","sur"],hint:"sur le dos ＝ 仰向けに・背中の上に（Mon chat dort souvent sur le dos.）"},
+  {id:"p7-1-5",theme:"前置詞：場所",exercice:"Ex.2",date:"5/3",fr:"Il tient une cigarette (__) ses doigts.",ja:"彼は指の間にタバコを挟んでいる。",answer:"entre",choices:["entre","dans","avec","sous"],hint:"entre〜 ＝ 〜のあいだに（2つ以上のものの間）"},
+  {id:"p7-2-1",theme:"前置詞：場所",exercice:"Ex.2",date:"5/3",fr:"Je remets volontiers ces manuscrits (__) vos mains.",ja:"これらの原稿を喜んであなたにお渡しします。",answer:"entre",choices:["entre","dans","en","sous"],hint:"entre les mains de qn ＝ 人の手に（Je me remets entre les mains de Dieu.）"},
+  {id:"p7-2-2",theme:"前置詞：場所",exercice:"Ex.2",date:"5/3",fr:"L'accident s'est passé (__) mes yeux.",ja:"その事故は私の目の前で起きた。",answer:"sous",choices:["sous","devant","avant","en face de"],hint:"sous les yeux ＝ 目の前で（tombée sous les yeux 偶然目に入る）"},
+  {id:"p7-2-4",theme:"前置詞：場所",exercice:"Ex.2",date:"5/3",fr:"Nous avons trois semaines (__) nous.",ja:"私たちには3週間ある。",answer:"devant",choices:["devant","avec","pour","sur"],hint:"avoir qc devant soi ＝ 〜が前にある（将来がある・時間がある）"},
+  {id:"p7-3-1",theme:"前置詞：場所",exercice:"Ex.2",date:"5/3",fr:"Ces pizzas sont à consommer (__) place ou à emporter.",ja:"このピザはその場で食べるか、持ち帰るかのどちらかです。",answer:"sur",choices:["sur","en","à","dans"],hint:"sur place ＝ その場で（La police est arrivée sur place.）"},
+  {id:"p7-3-3",theme:"前置詞：場所",exercice:"Ex.2",date:"5/3",fr:"J'aime beaucoup me promener (__) la pluie.",ja:"私は雨の中を散歩するのがとても好きだ。",answer:"sous",choices:["sous","dans","par","en"],hint:"sous la pluie ＝ 雨の中で（Ne t'assois pas par terre! 床にすわるな）"},
+  {id:"p7-3-4",theme:"前置詞：場所",exercice:"Ex.2",date:"5/3",fr:"Si vous passez (__) Paris, venez me voir.",ja:"パリに立ち寄ることがあれば、会いに来てください。",answer:"par",choices:["par","à","dans","en"],hint:"passer par ＝ 〜を通って・経由して（Je suis allé à Paris en passant par Moscou.）"},
+  {id:"p7-3-5",theme:"前置詞：場所",exercice:"Ex.2",date:"5/3",fr:"Vous allez (__) bout de la rue.",ja:"通りのつきあたりまで行ってください。",answer:"jusqu'au",choices:["jusqu'au","vers le","au","dans le"],hint:"jusqu'au bout ＝ 端まで・最後まで（j'irai jusqu'au bout やり通す）"},
+
+  {id:"p9-1-1",theme:"前置詞：場所",exercice:"Ex.3",date:"5/4",fr:"Elle s'est sentie malade (__) le début du cours.",ja:"彼女は授業が始まるとすぐに気分が悪くなった。",answer:"dès",choices:["dès","depuis","à","dans"],hint:"dès ＝ 〜からすぐに（dès le début 最初から）"},
+  {id:"p9-1-2",theme:"前置詞：場所",exercice:"Ex.3",date:"5/4",fr:"Elle vient chez moi (__) toute heure de la nuit.",ja:"彼女は夜中の何時でも私の家に来る。",answer:"à",choices:["à","dans","en","de"],hint:"à toute heure ＝ 時間をとわず（Cette pharmacie est ouverte à toute heure.）"},
+  {id:"p9-1-3",theme:"前置詞：場所",exercice:"Ex.3",date:"5/4",fr:"Il n'y a rien de nouveau (__) hier.",ja:"昨日以来新しいことは何もない。",answer:"depuis",choices:["depuis","de","dès","après"],hint:"depuis ＝ 〜以来・〜前から（Il est absent depuis hier. 彼はきのうから休んでいる）"},
+  {id:"p9-1-4",theme:"前置詞：場所",exercice:"Ex.3",date:"5/4",fr:"Je passerai vous prendre en voiture (__) bonne heure, demain matin.",ja:"明日の朝早く、車で迎えに行きます。",answer:"à",choices:["à","de","en","dès"],hint:"à bonne heure ＝ 早い時間に（de bonne heure 朝早く）"},
+  {id:"p9-1-5",theme:"前置詞：場所",exercice:"Ex.3",date:"5/4",fr:"Ma mère faisait du piano (__) sa jeunesse.",ja:"母は若いころピアノを弾いていた。",answer:"dans",choices:["dans","en","de","à"],hint:"dans sa jeunesse ＝ 若い頃（Dans son enfance, il habitait à Dijon.）"},
+  {id:"p9-2-1",theme:"前置詞：場所",exercice:"Ex.3",date:"5/4",fr:"(__) avoir consulté mon mari, je prendrai une décision.",ja:"夫と相談してから決断します。",answer:"Après",choices:["Après","Avant","Depuis","Dès"],hint:"après + avoir + p.p. ＝ 〜してから（現在以外の時点を起点とする）"},
+  {id:"p9-2-2",theme:"前置詞：場所",exercice:"Ex.3",date:"5/4",fr:"Elle a rencontré André (__) son apprentissage chez un coiffeur.",ja:"彼女は美容院で見習いをしているときアンドレと出会った。",answer:"dans",choices:["dans","pendant","lors de","durant"],hint:"dans + 定冠詞 + 名詞 ＝ 〜の期間に（Dans son enfance...）"},
+  {id:"p9-2-3",theme:"前置詞：場所",exercice:"Ex.3",date:"5/4",fr:"Je les connais tous (__) longue date.",ja:"彼らのことは以前から全員知っている。",answer:"de",choices:["de","depuis","à","d'une"],hint:"de longue date ＝ 以前から・長年（Il est un ami de longue date.）"},
+  {id:"p9-2-5",theme:"前置詞：場所",exercice:"Ex.3",date:"5/4",fr:"On fera la réunion (__) le 20 février, on vous précisera la date plus tard.",ja:"会議は2月20日ごろ行います、後日詳しい日程をお知らせします。",answer:"vers",choices:["vers","avant","après","autour de"],hint:"vers + 日付 ＝ 〜ごろ（Il rentre tous les soirs vers sept heures.）"},
+  {id:"p9-3-1",theme:"前置詞：場所",exercice:"Ex.3",date:"5/4",fr:"Elle est arrivée juste (__) ton coup de téléphone.",ja:"彼女はあなたの電話のちょうど後に来た。",answer:"après",choices:["après","avant","depuis","dès"],hint:"après ＝ 〜の後ろに・〜の後に"},
+  {id:"p9-3-3",theme:"前置詞：場所",exercice:"Ex.3",date:"5/4",fr:"On se reverra (__) le courant du mois d'avril.",ja:"4月中にまた会いましょう。",answer:"dans",choices:["dans","en","pendant","durant"],hint:"dans le courant de ＝ 〜の間に（工事は来週中に始まる Les travaux commencent dans le courant de la semaine prochaine.）"},
+  {id:"p9-3-4",theme:"前置詞：場所",exercice:"Ex.3",date:"5/4",fr:"(__) partir de demain, le nouvel horaire entre en vigueur.",ja:"明日から新しい時刻表が有効になる。",answer:"À",choices:["À","Dès","Depuis","En"],hint:"à partir de ＝ 〜から（未来について）（↔ depuis は過去・現在について）"},
+  {id:"p9-3-5",theme:"前置詞：場所",exercice:"Ex.3",date:"5/4",fr:"Pauvre Antoine, il est aveugle (__) naissance.",ja:"かわいそうなアントワーヌ、彼は生まれつき目が見えない。",answer:"de",choices:["de","dès","depuis","en"],hint:"de naissance ＝ 生まれつき（Chez elle, la paresse, c'est de naissance.）"},
+
+  /* ★ 以降、毎日ここに追加 ★ */
 ];
 
-/* ─────────────────────────────
-   localStorage（苦手保存）
-───────────────────────────── */
-const KEY_WEAK = 'bukken2_ana_weak_v2';
-function loadWeak()  { try { return new Set(JSON.parse(localStorage.getItem(KEY_WEAK)||'[]')); } catch(e) { return new Set(); } }
-function saveWeak(s) { localStorage.setItem(KEY_WEAK, JSON.stringify([...s])); }
+/* =====================================================
+   ANKIスタイル復習システム
+   levels: new / again / fuzzy / perfect
+   nextReview: ISO日付文字列 (YYYY-MM-DD)
+===================================================== */
+const STORAGE_KEY = 'bukken2_anki_v3';
+let cardData = {}; // id -> {level, nextReview}
 
-let deck=[], current=0, okCount=0, ngCount=0;
-let weakSet=loadWeak(), answered=false;
+function loadCardData() {
+  try { cardData = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { cardData = {}; }
+}
+function saveCardData() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(cardData));
+}
+function todayStr() {
+  return new Date().toISOString().slice(0,10);
+}
+function addDays(days) {
+  const d = new Date(); d.setDate(d.getDate() + days);
+  return d.toISOString().slice(0,10);
+}
+function getCardInfo(id) {
+  return cardData[id] || {level:'new', nextReview: todayStr()};
+}
+function setCardRating(id, rating) {
+  const info = {level: rating};
+  if (rating === 'again')   info.nextReview = todayStr();
+  else if (rating === 'fuzzy')   info.nextReview = addDays(2);
+  else if (rating === 'perfect') info.nextReview = addDays(7);
+  cardData[id] = info;
+  saveCardData();
+}
+function getDueQuestions(pool) {
+  const today = todayStr();
+  return pool.filter(q => {
+    const info = getCardInfo(q.id);
+    return info.level === 'new' || info.level === 'again' || info.nextReview <= today;
+  });
+}
+function getLevelLabel(id) {
+  const info = getCardInfo(id);
+  if (info.level === 'new')     return {text:'新規',cls:'level-new'};
+  if (info.level === 'again')   return {text:'再挑戦',cls:'level-again'};
+  if (info.level === 'fuzzy')   return {text:'うろ覚え',cls:'level-soon'};
+  if (info.level === 'perfect') return {text:'習得済み',cls:'level-learned'};
+  return {text:'-',cls:'level-new'};
+}
+
+/* =====================================================
+   タブ切り替え
+===================================================== */
+function switchTab(tab) {
+  ['practice','review','stats'].forEach(t => {
+    document.getElementById('tab-'+t).style.display = t===tab ? 'block' : 'none';
+    document.querySelectorAll('.tab-btn').forEach((b,i) => {
+      const tabs = ['practice','review','stats'];
+      b.classList.toggle('active', tabs[i]===tab);
+    });
+  });
+  if (tab==='review') updateReviewBanner();
+  if (tab==='stats')  updateStats();
+}
+
+/* =====================================================
+   練習モード
+===================================================== */
+let deck=[], current=0, okCount=0, ngCount=0, answered=false;
 
 function getPool() {
   const theme = document.getElementById('theme-select').value;
-  const mode  = document.getElementById('mode-select').value;
   let qs = QUESTIONS;
   if (theme !== 'all') qs = qs.filter(q => q.theme === theme);
-  if (mode  === 'weak') qs = qs.filter(q => weakSet.has(q.id));
   return qs;
 }
 
 function shuffle(arr) {
-  const a = [...arr];
-  for (let i=a.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
-  return a;
+  const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a;
 }
 
-function restartDeck() {
+function startPractice() {
   const pool = getPool();
-  if (pool.length === 0) {
-    alert('苦手問題がまだありません。');
-    document.getElementById('mode-select').value = 'all';
-    restartDeck(); return;
-  }
+  if (pool.length===0){alert('問題がありません。');return;}
   deck = shuffle(pool);
   current=0; okCount=0; ngCount=0;
-  document.getElementById('finish-area').style.display = 'none';
-  document.getElementById('main-area').style.display = 'block';
+  document.getElementById('finish-area').style.display='none';
+  document.getElementById('main-area').style.display='block';
   showQuestion();
+  updateHeaderCount();
 }
 
 function showQuestion() {
-  if (current >= deck.length) { showFinish(); return; }
-  answered = false;
-  const q = deck[current];
+  if (current>=deck.length){showFinish();return;}
+  answered=false;
+  const q=deck[current];
+  const lbl=getLevelLabel(q.id);
 
-  document.getElementById('q-theme').textContent = q.theme + '　' + q.exercice;
-  document.getElementById('q-num').textContent = (current+1) + ' / ' + deck.length;
-  document.getElementById('q-fr').innerHTML = q.fr.replace('(__)', '<span class="blank">　　　　</span>');
-  document.getElementById('q-ja').textContent = q.ja;
-  document.getElementById('result-row').innerHTML = '';
-  document.getElementById('next-btn').disabled = true;
+  document.getElementById('q-theme').textContent=q.theme+'　'+q.exercice;
+  document.getElementById('q-num').textContent=(current+1)+' / '+deck.length;
+  document.getElementById('q-fr').innerHTML=q.fr.replace('(__)','<span class="blank">　　　　</span>');
+  document.getElementById('q-ja').textContent=q.ja;
+  document.getElementById('result-row').innerHTML='';
+  document.getElementById('anki-label').style.display='none';
+  document.getElementById('anki-btns').style.display='none';
+  document.getElementById('next-btn').style.display='none';
 
-  const choices = shuffle([...q.choices]);
-  const container = document.getElementById('choices');
-  container.innerHTML = '';
-  choices.forEach(c => {
-    const btn = document.createElement('button');
-    btn.className = 'choice-btn';
-    btn.textContent = c;
-    btn.onclick = () => selectAnswer(btn, c === q.answer, q);
+  const choices=shuffle([...q.choices]);
+  const container=document.getElementById('choices');
+  container.innerHTML='';
+  choices.forEach(c=>{
+    const btn=document.createElement('button');
+    btn.className='choice-btn'; btn.textContent=c;
+    btn.onclick=()=>selectAnswer(btn, c===q.answer, q);
     container.appendChild(btn);
   });
-  updateStats();
+  updateProgressBar();
+  document.getElementById('s-due').textContent=getDueQuestions(getPool()).length;
 }
 
 function selectAnswer(btn, isCorrect, q) {
-  if (answered) return;
-  answered = true;
-  document.querySelectorAll('.choice-btn').forEach(b => {
-    b.disabled = true;
-    if (b.textContent === q.answer) b.classList.add('correct');
-  });
-
-  const frAnswered = q.fr.replace('(__)', '<strong>' + q.answer + '</strong>');
-  const row = document.getElementById('result-row');
-
-  if (isCorrect) {
-    btn.classList.add('correct'); okCount++;
-    weakSet.delete(q.id); saveWeak(weakSet);
-    row.innerHTML = '<div class="result-box ok"><div class="result-msg ok">正解！</div><div class="result-hint">' + frAnswered + '<br>' + q.hint + '</div></div>';
-  } else {
-    btn.classList.add('wrong'); ngCount++;
-    weakSet.add(q.id); saveWeak(weakSet);
-    row.innerHTML = '<div class="result-box ng"><div class="result-msg ng">不正解 — 苦手に登録しました</div><div class="result-hint">' + frAnswered + '<br>' + q.hint + '</div></div>';
-  }
-  document.getElementById('next-btn').disabled = false;
-  document.getElementById('s-weak').textContent = weakSet.size;
+  if(answered)return; answered=true;
+  document.querySelectorAll('.choice-btn').forEach(b=>{b.disabled=true; if(b.textContent===q.answer)b.classList.add('correct');});
+  const frAnswered=q.fr.replace('(__)','<strong>'+q.answer+'</strong>');
+  const row=document.getElementById('result-row');
+  if(isCorrect){btn.classList.add('correct');okCount++; row.innerHTML='<div class="result-box ok"><div class="result-msg ok">正解！</div><div class="result-hint">'+frAnswered+'<br>'+q.hint+'</div></div>';}
+  else{btn.classList.add('wrong');ngCount++; row.innerHTML='<div class="result-box ng"><div class="result-msg ng">不正解</div><div class="result-hint">'+frAnswered+'<br>'+q.hint+'</div></div>';}
+  document.getElementById('anki-label').style.display='block';
+  document.getElementById('anki-btns').style.display='grid';
+  updateProgressBar();
 }
 
-function nextCard() { current++; showQuestion(); }
+function ankiRate(rating) {
+  setCardRating(deck[current].id, rating);
+  current++;
+  document.getElementById('anki-label').style.display='none';
+  document.getElementById('anki-btns').style.display='none';
+  showQuestion();
+}
 
-function updateStats() {
-  const total = deck.length;
-  document.getElementById('s-remain').textContent = Math.max(0, total-current);
-  document.getElementById('s-ok').textContent = okCount;
-  document.getElementById('s-ng').textContent = ngCount;
-  document.getElementById('s-weak').textContent = weakSet.size;
-  document.getElementById('prog').style.width = (total>0 ? Math.round(current/total*100) : 0) + '%';
-  document.getElementById('word-count').textContent = '収録問題数：' + QUESTIONS.length + '問';
-  document.getElementById('header-right').textContent = QUESTIONS.length + '問収録';
+function nextCard(){current++;showQuestion();}
+
+function updateProgressBar() {
+  const total=deck.length;
+  document.getElementById('s-remain').textContent=Math.max(0,total-current);
+  document.getElementById('s-ok').textContent=okCount;
+  document.getElementById('s-ng').textContent=ngCount;
+  document.getElementById('prog').style.width=(total>0?Math.round(current/total*100):0)+'%';
 }
 
 function showFinish() {
-  document.getElementById('main-area').style.display = 'none';
-  document.getElementById('finish-area').style.display = 'block';
-  const total = okCount + ngCount;
-  const rate = total>0 ? Math.round(okCount/total*100) : 0;
-  document.getElementById('finish-title').textContent = '完了！　正解率 ' + rate + '%';
-  document.getElementById('finish-sub').textContent = '正解 ' + okCount + ' / ' + total + '問\n苦手登録 ' + weakSet.size + '問';
+  document.getElementById('main-area').style.display='none';
+  document.getElementById('finish-area').style.display='block';
+  const total=okCount+ngCount;
+  const rate=total>0?Math.round(okCount/total*100):0;
+  document.getElementById('finish-title').textContent='完了！　正解率 '+rate+'%';
+  document.getElementById('finish-sub').textContent='正解 '+okCount+' / '+total+'問\n復習タブで苦手を克服しよう！';
 }
 
-function studyWeak() {
-  document.getElementById('mode-select').value = 'weak';
-  restartDeck();
+function updateHeaderCount() {
+  document.getElementById('header-right').textContent=QUESTIONS.length+'問収録';
+  document.getElementById('word-count').textContent='収録問題数：'+QUESTIONS.length+'問';
 }
 
-document.getElementById('theme-select').addEventListener('change', restartDeck);
-document.getElementById('mode-select').addEventListener('change', restartDeck);
-restartDeck();
+/* =====================================================
+   復習モード
+===================================================== */
+let reviewDeck=[], reviewCurrent=0, reviewDone=0;
+
+function updateReviewBanner() {
+  const due=getDueQuestions(QUESTIONS);
+  document.getElementById('due-count').textContent=due.length;
+}
+
+function startReview() {
+  const due=getDueQuestions(QUESTIONS);
+  if(due.length===0){alert('今日の復習はありません！');return;}
+  reviewDeck=shuffle(due); reviewCurrent=0; reviewDone=0;
+  document.getElementById('review-done').style.display='none';
+  document.getElementById('review-area').style.display='block';
+  showReviewQuestion();
+}
+
+function showReviewQuestion() {
+  if(reviewCurrent>=reviewDeck.length){showReviewDone();return;}
+  const q=reviewDeck[reviewCurrent];
+  const lbl=getLevelLabel(q.id);
+  document.getElementById('rq-theme').textContent=q.theme+'　'+q.exercice;
+  document.getElementById('rq-level').textContent=lbl.text;
+  document.getElementById('rq-level').className='q-level '+lbl.cls;
+  document.getElementById('rq-fr').innerHTML=q.fr.replace('(__)','<span class="blank">　　　　</span>');
+  document.getElementById('rq-ja').textContent=q.ja;
+  document.getElementById('r-result-row').innerHTML='';
+  document.getElementById('r-anki-label').style.display='none';
+  document.getElementById('r-anki-btns').style.display='none';
+  answered=false;
+
+  const choices=shuffle([...q.choices]);
+  const container=document.getElementById('r-choices');
+  container.innerHTML='';
+  choices.forEach(c=>{
+    const btn=document.createElement('button');
+    btn.className='choice-btn'; btn.textContent=c;
+    btn.onclick=()=>selectReviewAnswer(btn,c===q.answer,q);
+    container.appendChild(btn);
+  });
+}
+
+function selectReviewAnswer(btn,isCorrect,q){
+  if(answered)return; answered=true;
+  document.querySelectorAll('#r-choices .choice-btn').forEach(b=>{b.disabled=true;if(b.textContent===q.answer)b.classList.add('correct');});
+  const frAnswered=q.fr.replace('(__)','<strong>'+q.answer+'</strong>');
+  const row=document.getElementById('r-result-row');
+  if(isCorrect){btn.classList.add('correct'); row.innerHTML='<div class="result-box ok"><div class="result-msg ok">正解！</div><div class="result-hint">'+frAnswered+'<br>'+q.hint+'</div></div>';}
+  else{btn.classList.add('wrong'); row.innerHTML='<div class="result-box ng"><div class="result-msg ng">不正解</div><div class="result-hint">'+frAnswered+'<br>'+q.hint+'</div></div>';}
+  document.getElementById('r-anki-label').style.display='block';
+  document.getElementById('r-anki-btns').style.display='grid';
+  reviewDone++;
+}
+
+function reviewAnkiRate(rating){
+  setCardRating(reviewDeck[reviewCurrent].id,rating);
+  reviewCurrent++;
+  document.getElementById('r-anki-label').style.display='none';
+  document.getElementById('r-anki-btns').style.display='none';
+  showReviewQuestion();
+  updateReviewBanner();
+}
+
+function showReviewDone(){
+  document.getElementById('review-area').style.display='none';
+  document.getElementById('review-done').style.display='block';
+  document.getElementById('review-done-sub').textContent=reviewDone+'問を復習しました！\n明日もこのタブをチェックしてください。';
+  updateReviewBanner();
+}
+
+/* =====================================================
+   統計タブ
+===================================================== */
+function updateStats() {
+  const counts={new:0,again:0,fuzzy:0,perfect:0};
+  QUESTIONS.forEach(q=>{const info=getCardInfo(q.id); counts[info.level]=(counts[info.level]||0)+1;});
+  document.getElementById('level-dist').innerHTML=
+    '<div class="level-row"><span><span class="level-dot" style="background:#f0f0f0;border:1px solid #ccc;"></span>新規（未学習）</span><span>'+counts.new+'問</span></div>'+
+    '<div class="level-row"><span><span class="level-dot" style="background:#FDECEA;"></span>再挑戦（すぐ再出題）</span><span>'+counts.again+'問</span></div>'+
+    '<div class="level-row"><span><span class="level-dot" style="background:#FFF3E0;"></span>うろ覚え（2日後）</span><span>'+counts.fuzzy+'問</span></div>'+
+    '<div class="level-row"><span><span class="level-dot" style="background:#EAF7EE;"></span>習得済み（7日後）</span><span>'+counts.perfect+'問</span></div>';
+
+  const today=todayStr();
+  const upcoming={};
+  QUESTIONS.forEach(q=>{
+    const info=getCardInfo(q.id);
+    if(info.level!=='new'&&info.level!=='again'){
+      const d=info.nextReview; upcoming[d]=(upcoming[d]||0)+1;
+    }
+  });
+  const sorted=Object.keys(upcoming).sort().slice(0,7);
+  const ul=sorted.map(d=>'<div class="upcoming-item"><span>'+d+(d===today?' (今日)':'')+'</span><span>'+upcoming[d]+'問</span></div>').join('');
+  document.getElementById('upcoming-list').innerHTML=ul||'<div style="font-size:12px;color:#aaa;padding:8px 0;">まだ復習予定がありません</div>';
+}
+
+/* =====================================================
+   初期化
+===================================================== */
+loadCardData();
+updateHeaderCount();
+updateReviewBanner();
+document.getElementById('theme-select').addEventListener('change', ()=>{});
 </script>
 </body>
 </html>
