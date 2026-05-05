@@ -757,7 +757,7 @@ function updateStats() {
    X投稿とカウントダウン
 ===================================================== */
 function getDaysLeft() {
-  const exam = new Date(2025, 5, 21);
+  const exam = new Date(2026, 5, 21);
   const today = new Date(); today.setHours(0,0,0,0); exam.setHours(0,0,0,0);
   return Math.max(0, Math.round((exam - today) / 86400000));
 }
@@ -765,10 +765,13 @@ function postToX() {
   var daysLeft = getDaysLeft();
   var perfect = QUESTIONS.filter(function(q){ return getCardInfo(q.id).level === 'perfect'; }).length;
   var total = QUESTIONS.length;
-  var t = '仏検2級まであと' + daysLeft + '日\n\n'
+  var examDate = new Date(2026, 5, 21);
+  var m = examDate.getMonth() + 1;
+  var d = examDate.getDate();
+  var t = '仏検2級まであと' + daysLeft + '日！（' + m + '月' + d + '日）\n\n'
     + '穴埋め問題アプリで毎日コツコツ練習中\n'
     + '習得済み：' + perfect + ' / ' + total + '問\n\n'
-    + '試験は6月21日。頭張ります！\n\n'
+    + '頭張ります！\n\n'
     + '#仏検2級 #フランス語学習 #仏検';
   window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(t), '_blank');
 }
