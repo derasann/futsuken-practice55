@@ -143,6 +143,8 @@ select { font-size: 13px; padding: 6px 10px; border: 0.5px solid #ccc; border-ra
       <option value="語彙：位置">&#128218; 語彙：位置 (Ex.5 p.45)</option>
       <option value="語彙：方向と形">&#128218; 語彙：方向と形 (Ex.6 p.47)</option>
       <option value="語彙：文書・娯楽・食事・建物">&#128218; 語彙：文書・娯楽・食事・建物 (Ex.37 p.109)</option>
+        <option value="語彙：部分">&#128218; 語彙：部分 (Ex.8 p.49)</option>
+      <option value="語彙：状態">&#128218; 語彙：状態 (Ex.9 p.53)</option>
       <option value="語彙：数量・有無">&#128218; 語彙：数量・有無 (Ex.7 p.51)</option>
       </optgroup>
       <optgroup label="&#128203; 動詞">
@@ -153,11 +155,14 @@ select { font-size: 13px; padding: 6px 10px; border: 0.5px solid #ccc; border-ra
       <option value="動詞：離合・到達">&#128203; 動詞：離合・到達 (Ex.5 p.125)</option>
       <option value="動詞：接続・出し入れ">&#128203; 動詞：接続・出し入れ (Ex.6 p.127)</option>
       <option value="動詞：変化・調整">&#128203; 動詞：変化・調整 (Ex.7 p.129)</option>
+        <option value="動詞：構成・過不足">&#128203; 動詞：構成・過不足 (Ex.8 p.130)</option>
+      <option value="動詞：増減・存廃">&#128203; 動詞：増減・存廃 (Ex.9 p.133)</option>
       </optgroup>
       <optgroup label="&#128205; 前置詞">
       <option value="前置詞：場所">&#128205; 前置詞：場所 (Ex.1-3 p.5-9)</option>
       <option value="前置詞：時">&#128205; 前置詞：時 (Ex.4 p.10-11)</option>
       <option value="前置詞：対象">&#128205; 前置詞：対象 (Ex.5 p.12)</option>
+        <option value="前置詞：状態">&#128205; 前置詞：状態 (Ex.6 p.15)</option>   
       </optgroup>
     </select>
     <button class="btn-small" onclick="startPractice()">スタート</button>
@@ -506,6 +511,80 @@ const QUESTIONS = [
   {id:"p9-3-5",theme:"前置詞：場所",exercice:"Ex.3",date:"5/4",fr:"Pauvre Antoine, il est aveugle (__) naissance.",ja:"かわいそうなアントワーヌ、彼は生まれつき目が見えない。",answer:"de",choices:["de","dès","depuis","en"],hint:"de naissance ＝ 生まれつき（Chez elle, la paresse, c'est de naissance.）"},
 
   /* ★ 以降、毎日ここに追加 ★ */
+  /* --- 語彙：部分 Ex.8 p.49 (5/7) --- */
+  {id:"p49-1",theme:"語彙：部分",exercice:"Ex.8",date:"5/7",fr:"Ajoutez une (__) de sel dans la sauce.",ja:"ソースに1つまみの塩を加えてください。",answer:"pincée",choices:["pincée","goutte","cuillère","grain"],hint:"pincée ＝ 1つまみ（une pincée de sel 1つまみの塩）"},
+  {id:"p49-2",theme:"語彙：部分",exercice:"Ex.8",date:"5/7",fr:"André fait (__) d'une équipe de rugby.",ja:"アンドレはラグビーチームに所属している。",answer:"partie",choices:["partie","part","groupe","membre"],hint:"faire partie de qc ＝ 〜に属する・〜の一員である"},
+  {id:"p49-3",theme:"語彙：部分",exercice:"Ex.8",date:"5/7",fr:"Ça fait trois (__) d'heure que je t'attends.",ja:"45分も君を待っている。",answer:"quarts",choices:["quarts","demis","tiers","portions"],hint:"quart ＝ 4分の1 ／ trois quarts d'heure 45分"},
+  {id:"p49-4",theme:"語彙：部分",exercice:"Ex.8",date:"5/7",fr:"Ce chemin mène (__) part, c'est une impasse.",ja:"この道はどこにも通じていない、行き止まりだ。",answer:"nulle",choices:["nulle","aucune","nul","sans"],hint:"nulle part ＝ どこにも（〜ない）（Je ne trouve mes lunettes nulle part.）"},
+  {id:"p49-5",theme:"語彙：部分",exercice:"Ex.8",date:"5/7",fr:"C'est (__) ce que je sais.",ja:"私が知っているのはそれだけです。",answer:"tout",choices:["tout","rien","toute","partout"],hint:"tout ce que ＝ 〜のすべて（J'ai noté tout ce qui est important.）"},
+  {id:"p49-6",theme:"語彙：部分",exercice:"Ex.8",date:"5/7",fr:"(__) de mes amis n'est venu me voir à l'hôpital.",ja:"友だちはだれも病院に見舞いには来てくれなかった。",answer:"Aucun",choices:["Aucun","Nul","Personne","Nulle"],hint:"aucun(e) ＝ 〔否定文で〕どんな〜も…ない（Il n'y a aucun risque.）"},
+  {id:"p49-7",theme:"語彙：部分",exercice:"Ex.8",date:"5/7",fr:"Dites-moi seulement en (__) comment ça s'est passé.",ja:"とにかくそんなことがどのようにして起こったのか大まかに話してください。",answer:"gros",choices:["gros","bref","résumé","général"],hint:"en gros ＝ 大体・ざっと（↔ en détail 詳細に）"},
+  {id:"p49-8",theme:"語彙：部分",exercice:"Ex.8",date:"5/7",fr:"Je voudrais dix (__) de jambon cru, s'il vous plaît.",ja:"生ハムを10枚ほしいのですが。",answer:"tranches",choices:["tranches","morceaux","parts","pièces"],hint:"tranche ＝ 1切れ（trois tranches de jambon 3枚のハム）"},
+  {id:"p49-9",theme:"語彙：部分",exercice:"Ex.8",date:"5/7",fr:"La (__) du temps, elle prenait son journal à un kiosque près du métro.",ja:"彼女はたいてい地下鉄の近くのキオスクで新聞を買った。",answer:"plupart",choices:["plupart","majorité","grande partie","totalité"],hint:"la plupart du temps ＝ ほとんどいつも（= le plus souvent）"},
+  {id:"p49-10",theme:"語彙：部分",exercice:"Ex.8",date:"5/7",fr:"L'antiquaire m'a finalement laissé ce tableau à (__) prix.",ja:"その古美術商は、この絵を結局半値で譲ってくれた。",answer:"moitié",choices:["moitié","demi","mi","tiers"],hint:"à moitié prix ＝ 半額で（à moitié 半分、ほとんど）"},
+  {id:"p49-11",theme:"語彙：部分",exercice:"Ex.8",date:"5/7",fr:"Elle change les rideaux de sa chambre (__) les trois mois.",ja:"彼女は3ヶ月に1度部屋のカーテンをかえる。",answer:"tous",choices:["tous","toutes","chaque","chacun"],hint:"tous les trois mois ＝ 3ヶ月ごとに（tous les deux jours 2日おきに）"},
+  {id:"p49-12",theme:"語彙：部分",exercice:"Ex.8",date:"5/7",fr:"Mettez dans le café deux (__) de sucre.",ja:"コーヒーに角砂糖を2個入れてください。",answer:"morceaux",choices:["morceaux","tranches","pincées","parts"],hint:"morceau ＝ 断片（un morceau de pain 1切れのパン ／ du sucre en morceaux 角砂糖）"},
+  {id:"p49-13",theme:"語彙：部分",exercice:"Ex.8",date:"5/7",fr:"Pour ma (__), je trouve le film extraordinaire.",ja:"私としてはその映画はすばらしいと思う。",answer:"part",choices:["part","partie","côté","avis"],hint:"pour ma part ＝ 私としては（= de mon côté）"},
+  {id:"p49-14",theme:"語彙：部分",exercice:"Ex.8",date:"5/7",fr:"Racontez-moi ce qui vous est arrivé, sans (__) dans les détails.",ja:"なにがあったのか話してください、細かいことはいいですから。",answer:"entrer",choices:["entrer","aller","tomber","descendre"],hint:"entrer dans les détails ＝ 細部に立ち入る（en détail 詳細に）"},
+  {id:"p49-15",theme:"語彙：部分",exercice:"Ex.8",date:"5/7",fr:"—Oui, mais je n'ai pas pu l'écouter en (__).",ja:"うん、でも最後まで聞くことはできなかったよ。",answer:"entier",choices:["entier","tout","complet","intégral"],hint:"en entier ＝ 全部を（Je n'ai pas vu le film en entier.）"},
+
+  /* --- 語彙：状態 Ex.9 p.53 (5/7) --- */
+  {id:"p53-1",theme:"語彙：状態",exercice:"Ex.9",date:"5/7",fr:"Cela n'(__) pas que tu as tort.",ja:"それでもやはり君の言っていることはまちがっている。",answer:"empêche",choices:["empêche","signifie","veut dire","prouve"],hint:"cela n'empêche pas que + 直説法 ＝ それでもやはり〜である"},
+  {id:"p53-2",theme:"語彙：状態",exercice:"Ex.9",date:"5/7",fr:"Elle est venue pendant votre absence ? —C'est (__).",ja:"彼女はあなたの不在中に来たのですか？ — たぶんね。",answer:"possible",choices:["possible","probable","certain","vrai"],hint:"C'est possible. ＝ たぶんね・ありえる"},
+  {id:"p53-3",theme:"語彙：状態",exercice:"Ex.9",date:"5/7",fr:"En (__) de pluie, la randonnée à bicyclette est remise.",ja:"雨が降ったらサイクリングは延期されます。",answer:"cas",choices:["cas","état","condition","situation"],hint:"en cas de + 無冠詞名詞 ＝ 〜の場合は（en cas de besoin 必要ならば）"},
+  {id:"p53-4",theme:"語彙：状態",exercice:"Ex.9",date:"5/7",fr:"En vacances, il ne descend que dans des hôtels de (__).",ja:"ヴァカンスで彼はデラックスホテルにしか泊まらない。",answer:"luxe",choices:["luxe","grand","première","haut"],hint:"de luxe ＝ 豪華な（un hôtel de luxe 高級ホテル）"},
+  {id:"p53-5",theme:"語彙：状態",exercice:"Ex.9",date:"5/7",fr:"Ils ne sont pas en (__) de juger de cette question.",ja:"彼らはこの問題に判断をくだすことはできない。",answer:"état",choices:["état","mesure","capacité","position"],hint:"en état de + 不定詞 ＝ 〜することができる"},
+  {id:"p53-6",theme:"語彙：状態",exercice:"Ex.9",date:"5/7",fr:"Il y a eu une (__) d'électricité à cause de l'orage.",ja:"嵐のために停電になった。",answer:"panne",choices:["panne","coupure","rupture","arrêt"],hint:"panne ＝ 故障（tomber en panne 故障する ／ une panne d'essence ガソリン切れ）"},
+  {id:"p53-7",theme:"語彙：状態",exercice:"Ex.9",date:"5/7",fr:"Je ferai mon (__) pour être là à l'heure.",ja:"私は極力定刻に着くようにします。",answer:"possible",choices:["possible","mieux","maximum","effort"],hint:"faire son possible pour + 不定詞 ＝ 〜するために全力をつくす"},
+  {id:"p53-8",theme:"語彙：状態",exercice:"Ex.9",date:"5/7",fr:"Dans ces (__), passez me voir demain soir !",ja:"そういうことなら、あすの晩会いに来てください！",answer:"conditions",choices:["conditions","cas","circonstances","situations"],hint:"dans ces conditions ＝ こうした状況では"},
+  {id:"p53-9",theme:"語彙：状態",exercice:"Ex.9",date:"5/7",fr:"La ligne est (__), rappelez plus tard.",ja:"話し中です、あとで電話をかけなおしてください。",answer:"occupée",choices:["occupée","prise","bloquée","fermée"],hint:"La ligne est occupée. ＝ 電話が話し中だ（les toilettes sont occupées トイレは使用中）"},
+  {id:"p53-10",theme:"語彙：状態",exercice:"Ex.9",date:"5/7",fr:"La voiture d'occasion qu'il a achetée est en mauvais (__).",ja:"彼が買った中古車はオンボロだ。",answer:"état",choices:["état","condition","forme","marche"],hint:"en bon [mauvais] état ＝ 状態のいい[悪い]"},
+  {id:"p53-11",theme:"語彙：状態",exercice:"Ex.9",date:"5/7",fr:"Le succès de cette réunion ne (__) que de vous.",ja:"会議がうまくいくかどうかはあなただけにかかっている。",answer:"dépend",choices:["dépend","tient","revient","appartient"],hint:"dépendre de ＝ 〜次第である（Ça dépend des circonstances.）"},
+  {id:"p53-12",theme:"語彙：状態",exercice:"Ex.9",date:"5/7",fr:"(__) que possible, vous écrirez lisiblement.",ja:"できるだけ読みやすい字で書いてください。",answer:"autant",choices:["autant","aussi","tant","plus"],hint:"autant que possible ＝ できるだけ"},
+  {id:"p53-13",theme:"語彙：状態",exercice:"Ex.9",date:"5/7",fr:"Samedi prochain, je conduis mes enfants dans un centre de (__).",ja:"今度の土曜日、子どもたちとレジャーセンターへ行きます。",answer:"loisirs",choices:["loisirs","jeux","sports","activités"],hint:"loisir ＝ 暇・余暇（à loisir 時間をかけて）"},
+  {id:"p53-14",theme:"語彙：状態",exercice:"Ex.9",date:"5/7",fr:"Simon écrit très mal, sa lettre est (__) à lire.",ja:"シモンはとても字がへただ、彼の字は読めない。",answer:"impossible",choices:["impossible","difficile","illisible","pénible"],hint:"impossible ＝ 不可能なこと（faire l'impossible できる限りのことをする）"},
+  {id:"p53-15",theme:"語彙：状態",exercice:"Ex.9",date:"5/7",fr:"Si tu ne veux pas venir, tu es (__) de refuser.",ja:"来たくないのなら、断ってもかまわんだよ。",answer:"libre",choices:["libre","autorisé","permis","en droit"],hint:"être libre de qc ＝ 〜することは自由（Vous êtes libre de prendre la parole.）"},
+
+  /* --- 動詞：構成・過不足 Ex.8 p.130 (5/7) --- */
+  {id:"p130-1-1",theme:"動詞：構成・過不足",exercice:"Ex.8",date:"5/7",fr:"Ils ont compris qu'ils (__) dans les vieux quartiers.",ja:"彼らは旧市街で迷っていることがわかった。",answer:"se perdaient",choices:["se perdaient","étaient perdus","s'égaraient","avaient perdu"],hint:"se perdre ＝ 失われる・道に迷う（Il s'est perdu dans le Quartier Latin.）"},
+  {id:"p130-1-2",theme:"動詞：構成・過不足",exercice:"Ex.8",date:"5/7",fr:"La semaine (__) sept jours.",ja:"1週間は7日である。",answer:"comprend",choices:["comprend","contient","consiste en","compose"],hint:"comprendre ＝ 含む（Sa maison comprend cinq chambres. 彼女の家は5部屋ある）"},
+  {id:"p130-1-3",theme:"動詞：構成・過不足",exercice:"Ex.8",date:"5/7",fr:"(__) ces papiers en indiquant votre nom et votre adresse.",ja:"氏名と住所を書いてこれらの書類に記入してください。",answer:"Remplissez",choices:["Remplissez","Complétez","Inscrivez","Notez"],hint:"remplir ＝ 満たす・記入する（Voulez-vous remplir ce formulaire ?）"},
+  {id:"p130-1-4",theme:"動詞：構成・過不足",exercice:"Ex.8",date:"5/7",fr:"Tu me (__) quand j'étais à Paris.",ja:"君がパリにいた時、私はさびしかった。",answer:"manquais",choices:["manquais","faisais défaut","rendais triste","laissais seul"],hint:"manquer à qn ＝ 人がさびしく思う（Tu me manques. 君がいなくてさびしい）"},
+  {id:"p130-1-5",theme:"動詞：構成・過不足",exercice:"Ex.8",date:"5/7",fr:"Quand vous avez besoin de moi, il vous (__) de m'appeler.",ja:"私が必要なときは、電話するだけでいいですよ。",answer:"suffit",choices:["suffit","faut","reste","revient"],hint:"il suffit de + 不定詞 ＝ 〜するだけで十分だ"},
+  {id:"p130-2-1",theme:"動詞：構成・過不足",exercice:"Ex.8",date:"5/7",fr:"Il ne (__) jamais de me saluer.",ja:"彼は私に挨拶することを決してしない。",answer:"manque",choices:["manque","oublie","cesse","arrête"],hint:"ne pas manquer de + 不定詞 ＝ 必ず〜する"},
+  {id:"p130-2-2",theme:"動詞：構成・過不足",exercice:"Ex.8",date:"5/7",fr:"Cet immeuble (__) une centaine de locataires.",ja:"この建物には約100人の入居者がいる。",answer:"abrite",choices:["abrite","comprend","contient","loge"],hint:"abriter ＝ 守る・収容する（Cette salle de concert abrite environ trois cents spectateurs.）"},
+  {id:"p130-2-3",theme:"動詞：構成・過不足",exercice:"Ex.8",date:"5/7",fr:"J'(__) une heure à l'attendre.",ja:"彼を1時間待ったが無駄だった。",answer:"ai perdu",choices:["ai perdu","ai passé","ai mis","ai gaspillé"],hint:"perdre du temps ＝ 時間を浪費する（↔ gagner）"},
+  {id:"p130-2-4",theme:"動詞：構成・過不足",exercice:"Ex.8",date:"5/7",fr:"Je leur ai expliqué en quoi (__) mon projet.",ja:"私は彼らに私の計画がどういうものかを説明した。",answer:"consistait",choices:["consistait","comprenait","composait","comportait"],hint:"consister à + 不定詞 ＝ 〜することにある（Son travail consiste à livrer les commandes.）"},
+  {id:"p130-2-5",theme:"動詞：構成・過不足",exercice:"Ex.8",date:"5/7",fr:"Une petite maison vous (__).",ja:"小さい家で十分でしょう。",answer:"suffit",choices:["suffit","convient","satisfait","contente"],hint:"suffire ＝ 〜に十分である（Cet appartement de trois pièces nous suffit.）"},
+
+  /* --- 動詞：増減・存廃 Ex.9 p.133 (5/7) --- */
+  {id:"p133-1-1",theme:"動詞：増減・存廃",exercice:"Ex.9",date:"5/7",fr:"Sa maladie l'a obligé à (__) le lit.",ja:"病気のために彼はベッドにいなければならなかった。",answer:"garder",choices:["garder","rester dans","occuper","tenir"],hint:"garder le lit ＝ 病気で寝ている"},
+  {id:"p133-1-2",theme:"動詞：増減・存廃",exercice:"Ex.9",date:"5/7",fr:"Sa visite de la ville lui (__) certainement un excellent souvenir.",ja:"彼は街を見物して確実によい思い出を残すだろう。",answer:"gardera",choices:["gardera","laissera","donnera","fournira"],hint:"garder ＝ 持ち続ける（Il m'a demandé de garder le secret.）"},
+  {id:"p133-1-3",theme:"動詞：増減・存廃",exercice:"Ex.9",date:"5/7",fr:"Tu (__) les deux bouteilles !",ja:"2本のボトルを全部飲んでしまったよ！",answer:"as vidé",choices:["as vidé","as bu","as terminé","as fini"],hint:"vider ＝ 空にする（vider une bouteille 1瓶あける）"},
+  {id:"p133-1-4",theme:"動詞：増減・存廃",exercice:"Ex.9",date:"5/7",fr:"Ce travail (__) ses capacités.",ja:"この仕事は彼の能力を超えている。",answer:"dépasse",choices:["dépasse","excède","surpasse","exige"],hint:"dépasser ＝ 追い抜く・越える（Qu'il refuse votre proposition, ça me dépasse.）"},
+  {id:"p133-1-5",theme:"動詞：増減・存廃",exercice:"Ex.9",date:"5/7",fr:"Le nombre de morts (__) si cette bataille continue.",ja:"この戦闘が続けば死者数は増えるだろう。",answer:"augmentera",choices:["augmentera","croîtra","grandira","montera"],hint:"augmenter ＝ 増やす・増加する（↔ diminuer）"},
+  {id:"p133-2-1",theme:"動詞：増減・存廃",exercice:"Ex.9",date:"5/7",fr:"On vous (__) le choix de la date du déménagement.",ja:"引っ越しの日取りはあなたに決めてもらいます。",answer:"laisse",choices:["laisse","donne","offre","remet"],hint:"laisser ＝ 残しておく・任せる（On ne m'a pas laissé le choix.）"},
+  {id:"p133-2-2",theme:"動詞：増減・存廃",exercice:"Ex.9",date:"5/7",fr:"Elle n'a pas voulu me regarder, elle (__) les yeux baissés.",ja:"彼女は私を見ようとせず、目を伏せたままだった。",answer:"a gardé",choices:["a gardé","a tenu","a laissé","a conservé"],hint:"garder ＝ 保つ・〜のままにしておく（Gardez votre manteau. コートは着たままでいてください）"},
+  {id:"p133-2-3",theme:"動詞：増減・存廃",exercice:"Ex.9",date:"5/7",fr:"Leur salaire (__) à la fin du mois.",ja:"彼らの給与は月末に支払われる。",answer:"est versé",choices:["est versé","est payé","est réglé","est distribué"],hint:"verser ＝ そそぐ・払い込む（Vous verserez cent euros à la commande.）"},
+  {id:"p133-2-4",theme:"動詞：増減・存廃",exercice:"Ex.9",date:"5/7",fr:"Son conseil (__) ma consommation de cigarettes.",ja:"彼のアドバイスで私のタバコの消費量が減った。",answer:"a réduit",choices:["a réduit","a diminué","a baissé","a limité"],hint:"réduire ＝ 減らす（Nous devons réduire nos dépenses.）"},
+  {id:"p133-2-5",theme:"動詞：増減・存廃",exercice:"Ex.9",date:"5/7",fr:"Nous ne (__) pas pourquoi il a refusé notre offre.",ja:"彼がなぜ私たちの申し出を断ったのか理解できない。",answer:"comprenons",choices:["comprenons","savons","connaissons","réalisons"],hint:"comprendre ＝ 理解する"},
+
+  /* --- 前置詞：状態を表わす前置詞 Ex.6 p.15 (5/7) --- */
+  {id:"p15-1-1",theme:"前置詞：状態",exercice:"Ex.6",date:"5/7",fr:"J'ai essayé de persuader ma femme, mais (__) succès ! Tant pis !",ja:"妻を説得しようとしたが、うまくいかなかった！残念！",answer:"sans",choices:["sans","avec","en","sous"],hint:"sans + 無冠詞名詞 ＝ 〜なしに（Sans son aide, je n'aurais pas pu réussir.）"},
+  {id:"p15-1-2",theme:"前置詞：状態",exercice:"Ex.6",date:"5/7",fr:"Je déteste le mensonge (__) toutes ses formes.",ja:"私はいかなる形であれ嘘が嫌いだ。",answer:"sous",choices:["sous","dans","en","avec"],hint:"sous ＝ 〜のもとで（Il déteste la tyrannie sous toutes ses formes.）"},
+  {id:"p15-1-3",theme:"前置詞：状態",exercice:"Ex.6",date:"5/7",fr:"Je lui ai écrit lettre (__) lettre, mais je n'ai pas obtenu de réponse.",ja:"彼に何度も手紙を書いたが、返事はもらえなかった。",answer:"sur",choices:["sur","après","puis","et"],hint:"sur ＝ 〜に重ねて（Il a dit bêtise sur bêtise. 彼は次々と馬鹿なことを言った）"},
+  {id:"p15-1-4",theme:"前置詞：状態",exercice:"Ex.6",date:"5/7",fr:"(__) nous, je peux te dire que je n'aime pas beaucoup Monique.",ja:"ここだけの話だが、モニクはあまり好きじゃないんだ。",answer:"Entre",choices:["Entre","Parmi","Pour","Avec"],hint:"entre nous ＝ 私たちだけの話（C'est strictement entre nous.）"},
+  {id:"p15-1-5",theme:"前置詞：状態",exercice:"Ex.6",date:"5/7",fr:"Paul m'a téléphoné, il arrivera (__) une demi-heure de retard.",ja:"ポールから電話があり、30分遅れて着くとのことだ。",answer:"avec",choices:["avec","en","par","pour"],hint:"avec ＝ 〜つきで（L'avion arrivera avec une heure de retard. 飛行機は1時間遅れるだろう）"},
+  {id:"p15-2-1",theme:"前置詞：状態",exercice:"Ex.6",date:"5/7",fr:"Il nous a aidés (__) gentillesse.",ja:"彼は親切に私たちを助けてくれた。",answer:"avec",choices:["avec","en","par","de"],hint:"avec ＝ 〜をもって・〜の様子で（J'accepte avec plaisir. 喜んで承知します）"},
+  {id:"p15-2-2",theme:"前置詞：状態",exercice:"Ex.6",date:"5/7",fr:"Ils n'invitent personne. Ils préfèrent passer la soirée (__) eux.",ja:"彼らは誰も招待しない。仲間うちだけで夕べを過ごすのが好きだ。",answer:"entre",choices:["entre","avec","sans","parmi"],hint:"entre ＝ 〜のあいだで（Nous avons passé Noël entre amis.）"},
+  {id:"p15-2-3",theme:"前置詞：状態",exercice:"Ex.6",date:"5/7",fr:"Le chef d'entreprise a cinquante hommes (__) ses ordres.",ja:"その社長は50人の部下を持っている。",answer:"sous",choices:["sous","dans","avec","à"],hint:"sous ＝ 〜のもとで（On travaille sous la direction d'un homme compétent.）"},
+  {id:"p15-2-4",theme:"前置詞：状態",exercice:"Ex.6",date:"5/7",fr:"L'état du malade est (__) changement.",ja:"患者の容態は変化している。",answer:"sans",choices:["sans","avec","en","hors"],hint:"sans ＝ 〜なしに（Il est parti sans même me dire au revoir.）"},
+  {id:"p15-2-5",theme:"前置詞：状態",exercice:"Ex.6",date:"5/7",fr:"Nous déjeunons ensemble demain, (__) imprévu.",ja:"不測の事態がなければ、明日一緒に昼食を食べましょう。",answer:"sauf",choices:["sauf","sans","hors","excepté"],hint:"sauf ＝ 〜をのぞいて（Tout le monde était là, sauf Alain.）"},
+  {id:"p15-3-1",theme:"前置詞：状態",exercice:"Ex.6",date:"5/7",fr:"À cause du tremblement de terre, cet ascenseur est (__) service.",ja:"地震のため、このエレベーターは使用不能です。",answer:"hors",choices:["hors","sans","en","hors de"],hint:"hors service ＝ 使用不能（Le malade est maintenant hors de danger. 患者はもう危険を脱した）"},
+  {id:"p15-3-2",theme:"前置詞：状態",exercice:"Ex.6",date:"5/7",fr:"Coup (__) coup, il a perdu sa femme et sa fille.",ja:"相次いで、彼は妻と娘を亡くした。",answer:"sur",choices:["sur","après","et","puis"],hint:"coup sur coup ＝ 立て続けに"},
+  {id:"p15-3-3",theme:"前置詞：状態",exercice:"Ex.6",date:"5/7",fr:"(__) la IVe République, les ministres ont souvent changé.",ja:"第4共和制のもとで、大臣たちはしばしば変わった。",answer:"Sous",choices:["Sous","Dans","Pendant","En"],hint:"sous ＝ 〜のもとで（Parlez-moi de la vie des Français sous Louis XIV.）"},
+  {id:"p15-3-4",theme:"前置詞：状態",exercice:"Ex.6",date:"5/7",fr:"L'avion a disparu hier (__) 88 personnes à bord.",ja:"その飛行機は昨日88名の乗客を乗せたまま消えた。",answer:"avec",choices:["avec","et","plus","dont"],hint:"avec ＝ 〜をともなって（付随）"},
+  {id:"p15-3-5",theme:"前置詞：状態",exercice:"Ex.6",date:"5/7",fr:"Vous avez déjà manqué trois jours (__) compter toutes les fois où vous arrivez en retard.",ja:"遅刻した回数を数えなくても、あなたはもう3日欠席しています。",answer:"sans",choices:["sans","sans même","hors","à part"],hint:"sans compter ＝ 〜を数えに入れなくても・それ以外に"},
 
   /* --- 語彙：文書・娯楽・食事・建物 Ex.37 p.109 (5/6) --- */
   {id:"p109-1",theme:"語彙：文書・娯楽・食事・建物",exercice:"Ex.37",date:"5/6",
