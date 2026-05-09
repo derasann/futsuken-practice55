@@ -146,7 +146,9 @@ select { font-size: 13px; padding: 6px 10px; border: 0.5px solid #ccc; border-ra
         <option value="語彙：部分">&#128218; 語彙：部分 (Ex.8 p.49)</option>
       <option value="語彙：状態">&#128218; 語彙：状態 (Ex.9 p.53)</option>
       <option value="語彙：数量・有無">&#128218; 語彙：数量・有無 (Ex.7 p.51)</option>
-      </optgroup>
+            <option value="語彙：記号・方法">&#128218; 語彙：記号・方法 (Ex.36 p.107)</option>
+      <option value="語彙：状態(2)・価値">&#128218; 語彙：状態(2)・価値 (Ex.10 p.55)</option>
+</optgroup>
       <optgroup label="&#128203; 動詞">
       <option value="動詞：生死・危険">&#128203; 動詞：生死・危険 (Ex.1 p.117)</option>
       <option value="動詞：通行・移動">&#128203; 動詞：通行・移動 (Ex.2 p.119)</option>
@@ -513,6 +515,42 @@ const QUESTIONS = [
   {id:"p9-3-5",theme:"前置詞：場所",exercice:"Ex.3",date:"5/4",fr:"Pauvre Antoine, il est aveugle (__) naissance.",ja:"かわいそうなアントワーヌ、彼は生まれつき目が見えない。",answer:"de",choices:["de","dès","depuis","en"],hint:"de naissance ＝ 生まれつき（Chez elle, la paresse, c'est de naissance.）"},
 
   /* ★ 以降、毎日ここに追加 ★ */
+  /* ★ 追加日: 5/9 ★ */
+
+  /* --- 語彙：記号・方法 (5/9) --- */
+  {id:"p107-1",theme:"語彙：記号・方法",exercice:"Ex.36",date:"5/9",fr:"Alain ne parle pas encore très bien l'espagnol, il cherche ses (__).",ja:"アランはスペイン語をまだじょうずに話せない、話しかたがたどたどしい。",answer:"mots",choices:["mots","paroles","termes","expressions"],hint:"chercher ses mots ＝ 言葉につまる・たどたどしく話す"},
+  {id:"p107-2",theme:"語彙：記号・方法",exercice:"Ex.36",date:"5/9",fr:"Avec la prise de la Bastille, une page de l'histoire de France est (__).",ja:"バスティーユ牢獄の奪取によって、フランス史の新しい時代が始まる。",answer:"tournée",choices:["tournée","ouverte","commencée","écrite"],hint:"tourner la page ＝ ページをめくる・話題を変える・過去のことは忘れて先へ進む"},
+  {id:"p107-3",theme:"語彙：記号・方法",exercice:"Ex.36",date:"5/9",fr:"«Chat» se (__) «cat» en anglais.",ja:"「猫」のことを英語では「キャット」という。",answer:"dit",choices:["dit","traduit","appelle","nomme"],hint:"se dire ＝ 〜と言う（Comment ça se dit en français ? それはフランス語で何と言うのだろう？）"},
+  {id:"p107-4",theme:"語彙：記号・方法",exercice:"Ex.36",date:"5/9",fr:"De (__) manière, il viendra ce soir.",ja:"どっちにしても、彼は今晩来るよ。",answer:"toute",choices:["toute","toutes","quelque","aucune"],hint:"de toute manière ＝ いずれにせよ（= de toute façon, en tout cas）"},
+  {id:"p107-5",theme:"語彙：記号・方法",exercice:"Ex.36",date:"5/9",fr:"Elle a suivi à la (__) ce que je lui avais dit de faire.",ja:"彼女は私がするように言っておいたことをそのとおりに実行した。",answer:"lettre",choices:["lettre","ligne","mot","page"],hint:"à la lettre ＝ 文字どおりに・そのとおりに（= mot à mot, exactement）"},
+  {id:"p107-6",theme:"語彙：記号・方法",exercice:"Ex.36",date:"5/9",fr:"Il n'y a pas (__) de faire tout ce qu'il demande.",ja:"何でも彼の要求どおりにすることはできない。",answer:"moyen",choices:["moyen","façon","manière","comment"],hint:"il n'y a pas moyen de + 不定詞 ＝ 〜することはできない（= il n'est pas possible de）"},
+  {id:"p107-7",theme:"語彙：記号・方法",exercice:"Ex.36",date:"5/9",fr:"Je ne sais (__) faire.",ja:"どうしたらいいのかわからない。",answer:"comment",choices:["comment","quoi","que","quand"],hint:"comment + 不定詞 ＝ どのように〜すべきか（Comment faire ? どうしたらいいのだろうか？）"},
+  {id:"p107-8",theme:"語彙：記号・方法",exercice:"Ex.36",date:"5/9",fr:"Le temps est lourd, c'est (__) d'orage.",ja:"うっとうしい天気だ、嵐になるかもしれない。",answer:"signe",choices:["signe","signal","indice","marque"],hint:"c'est bon [mauvais] signe ＝ それはよい[悪い]前兆である"},
+  {id:"p107-9",theme:"語彙：記号・方法",exercice:"Ex.36",date:"5/9",fr:"Où en (__)-vous dans votre manuel de grammaire ?",ja:"文法の教科書は何ページまで進みましたか？",answer:"êtes",choices:["êtes","en êtes","sommes","avez"],hint:"en être à ＝ 〜まで進んでいる（À quelle page en sommes-nous ? 何ページまですみましたか？）"},
+  {id:"p107-10",theme:"語彙：記号・方法",exercice:"Ex.36",date:"5/9",fr:"Quelle est la (__) de cette montre ?",ja:"この腕時計はどのメーカーのものですか？",answer:"marque",choices:["marque","modèle","signe","label"],hint:"marque ＝ 目印・ブランド（de marque 一流メーカーの：C'est un produit de marque.）"},
+  {id:"p107-11",theme:"語彙：記号・方法",exercice:"Ex.36",date:"5/9",fr:"Quelles sont les (__) à remplir pour obtenir la carte de séjour ?",ja:"滞在許可証を取得するためにしなければならない手続きは何々ですか？",answer:"formalités",choices:["formalités","formulaires","papiers","démarches"],hint:"formalité ＝ 手続き・形式（accomplir les formalités de douanes 税関手続きをする）"},
+  {id:"p107-12",theme:"語彙：記号・方法",exercice:"Ex.36",date:"5/9",fr:"Reste tranquille de (__) à ne pas le déranger.",ja:"彼の邪魔をしないように静かにしていなさい。",answer:"façon",choices:["façon","manière","sorte","façon à"],hint:"de façon à + 不定詞 ＝ 〜するように（= afin de）（Il est parti très tôt de façon à être en avance.）"},
+  {id:"p107-13",theme:"語彙：記号・方法",exercice:"Ex.36",date:"5/9",fr:"Si tu t'y prenais (__), tu réussirais mieux.",ja:"違ったやり方をすればもっとうまくいくのに。",answer:"autrement",choices:["autrement","différemment","mieux","pareillement"],hint:"autrement ＝ 別の風に（J'aurais fait autrement. 私なら別のやり方をしただろうに）"},
+  {id:"p107-14",theme:"語彙：記号・方法",exercice:"Ex.36",date:"5/9",fr:"Voilà deux semaines qu'il ne m'a pas donné signe de (__).",ja:"私は2週間も彼から便りをもらっていない。",answer:"vie",choices:["vie","nouvelles","rien","réponse"],hint:"ne pas donner signe de vie ＝ 音信がない（faire signe à qn 人に連絡する）"},
+  {id:"p107-15",theme:"語彙：記号・方法",exercice:"Ex.36",date:"5/9",fr:"Vous essayez d'écrire à la (__) de Balzac ?",ja:"あなたはバルザックのように書こうとしているのですか？",answer:"manière",choices:["manière","façon","style","mode"],hint:"à la manière de ＝ 〜風に（Il peint à la manière de Monet. 彼はモネ風の絵を描く）"},
+
+  /* --- 語彙：状態(2)・価値 (5/9) --- */
+  {id:"p55-1",theme:"語彙：状態(2)・価値",exercice:"Ex.10",date:"5/9",fr:"C'est tout à fait par (__) que j'ai appris son accident.",ja:"私が彼の事故を知ったのは、まったくの偶然からです。",answer:"hasard",choices:["hasard","chance","accident","coïncidence"],hint:"par hasard ＝ 偶然に（au hasard 行きあたりばったりに）"},
+  {id:"p55-2",theme:"語彙：状態(2)・価値",exercice:"Ex.10",date:"5/9",fr:"C'est une cuisine (__) à cette région.",ja:"これはこの地方特有の料理です。",answer:"particulière",choices:["particulière","propre","spéciale","locale"],hint:"particulier(-ère) ＝ 特別の・固有の（C'est un plat particulier à cette région.）"},
+  {id:"p55-3",theme:"語彙：状態(2)・価値",exercice:"Ex.10",date:"5/9",fr:"D'(__), je déjeune au restaurant universitaire.",ja:"ふつう私は学食で昼食をとる。",answer:"ordinaire",choices:["ordinaire","habitude","coutume","général"],hint:"d'ordinaire ＝ 通常・ふつうは（= d'habitude, en général）"},
+  {id:"p55-4",theme:"語彙：状態(2)・価値",exercice:"Ex.10",date:"5/9",fr:"Donnez mon pantalon à (__).",ja:"ズボンをクリーニングに出してください。",answer:"nettoyer",choices:["nettoyer","laver","presser","réparer"],hint:"donner qc à nettoyer ＝ 〜をクリーニングに出す"},
+  {id:"p55-5",theme:"語彙：状態(2)・価値",exercice:"Ex.10",date:"5/9",fr:"Faites réchauffer la sauce à feu (__).",ja:"ソースをとろ火で温めなおしてください。",answer:"doux",choices:["doux","bas","faible","lent"],hint:"à feu doux ＝ とろ火で（doux, douce ＝ 穏やかな・柔らかい・甘い・優しい）"},
+  {id:"p55-6",theme:"語彙：状態(2)・価値",exercice:"Ex.10",date:"5/9",fr:"Il fait une température (__) pour la saison.",ja:"この季節の平温だ。",answer:"normale",choices:["normale","ordinaire","fixe","variable"],hint:"normal(e) ＝ 正常な・当然の（un prix normal 妥当な値段）"},
+  {id:"p55-7",theme:"語彙：状態(2)・価値",exercice:"Ex.10",date:"5/9",fr:"Il n'est pas paresseux, (__) étourdi.",ja:"彼は怠惰なのではなく、そそっかしいのです。",answer:"plutôt",choices:["plutôt","mais","seulement","vraiment"],hint:"plutôt ＝ むしろ（Ce professeur est plutôt ennuyeux. あの先生にはもううんざりだ）"},
+  {id:"p55-8",theme:"語彙：状態(2)・価値",exercice:"Ex.10",date:"5/9",fr:"J'aime mieux me taire (__) que de risquer de dire une bêtise.",ja:"ばかなことを言ってしまいそうならむしろ黙っているほうがいい。",answer:"plutôt",choices:["plutôt","mais","seulement","mieux"],hint:"plutôt que de + 不定詞 ＝ 〜するよりはむしろ"},
+  {id:"p55-9",theme:"語彙：状態(2)・価値",exercice:"Ex.10",date:"5/9",fr:"Je t'ai téléphoné à neuf heures (__).",ja:"ぼくは君にきっかり9時に電話した。",answer:"précises",choices:["précises","exactes","fixe","nettes"],hint:"précis(e) ＝ 正確な・時間に正確な（Venez ici à 3 heures précises. きっかり3時にここへ来てください）"},
+  {id:"p55-10",theme:"語彙：状態(2)・価値",exercice:"Ex.10",date:"5/9",fr:"Le menu est à prix (__), mais le vin est en supplément.",ja:"定食の料金は変わりませんが、ワインは別料金です。",answer:"fixe",choices:["fixe","normal","ordinaire","stable"],hint:"fixe ＝ 一定の・動かない（Je mange à heure fixe. 私は決まった時間に食事をする）"},
+  {id:"p55-11",theme:"語彙：状態(2)・価値",exercice:"Ex.10",date:"5/9",fr:"Le poids (__) de ce paquet de lessive est de cinq cents grammes.",ja:"この洗剤の正味の重さは500グラムです。",answer:"net",choices:["net","réel","exact","vrai"],hint:"net(te) ＝ 鮮明な・正味の（un salaire net 手どりの給料 ／ une photo nette 鮮明な写真）"},
+  {id:"p55-12",theme:"語彙：状態(2)・価値",exercice:"Ex.10",date:"5/9",fr:"Les résultats de l'enquête sont très (__) d'une personne à l'autre.",ja:"アンケート結果は人によってまちまちです。",answer:"variables",choices:["variables","différents","divers","variés"],hint:"variable ＝ 変わりやすい（= changeant, ↔ constant）（La météo annonce un temps variable pour demain.）"},
+  {id:"p55-13",theme:"語彙：状態(2)・価値",exercice:"Ex.10",date:"5/9",fr:"Mes enfants vont dans une école (__).",ja:"私の子どもたちは男女共学の学校に通っている。",answer:"mixte",choices:["mixte","publique","commune","séparée"],hint:"mixte ＝ 男女混合の（une école mixte 男女共学の学校）"},
+  {id:"p55-14",theme:"語彙：状態(2)・価値",exercice:"Ex.10",date:"5/9",fr:"Non (__) elle est méchante, mais aussi elle est avare.",ja:"彼女は意地悪なだけでなく、けちだ。",answer:"seulement",choices:["seulement","pas","que","jamais"],hint:"non seulement A, mais (aussi) B ＝ AだけでなくBもまた（Non seulement on le respecte, mais encore on l'aime.）"},
+  {id:"p55-15",theme:"語彙：状態(2)・価値",exercice:"Ex.10",date:"5/9",fr:"Paul, ne sors pas sans ton manteau, tu vas prendre (__).",ja:"ポール、コートも着ないで外出しなさんな、風邪をひくよ。",answer:"froid",choices:["froid","rhume","chaud","mal"],hint:"prendre froid ＝ 風邪をひく（en froid avec qn 人と仲たがいして）"},
+
   /* --- 語彙：部分 Ex.8 p.49 (5/7) --- */
   {id:"p49-1",theme:"語彙：部分",exercice:"Ex.8",date:"5/7",fr:"Ajoutez une (__) de sel dans la sauce.",ja:"ソースに1つまみの塩を加えてください。",answer:"pincée",choices:["pincée","goutte","cuillère","grain"],hint:"pincée ＝ 1つまみ（une pincée de sel 1つまみの塩）"},
   {id:"p49-2",theme:"語彙：部分",exercice:"Ex.8",date:"5/7",fr:"André fait (__) d'une équipe de rugby.",ja:"アンドレはラグビーチームに所属している。",answer:"partie",choices:["partie","part","groupe","membre"],hint:"faire partie de qc ＝ 〜に属する・〜の一員である"},
